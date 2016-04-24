@@ -1,0 +1,2 @@
+Add full files checker;
+Add redist files installer;
