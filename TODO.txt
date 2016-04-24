@@ -1,2 +1,4 @@
-Add full files checker;
-Add redist files installer;
+HaloCEP (Sandstone) {
+	Add full files checker;
+	Add redist files installer;
+}
