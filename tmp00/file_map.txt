@@ -1,0 +1,13 @@
+Keystone.dll - Used for in-game text overlay: Game will still run, but without in-game chat;
+ksimeui.dll - Used for in-game text overlay: Game will still run, but without in-game chat;
+ogg.dll - Ogg sound codec: Game will crash if missing;
+base.dll (haloce.exe) - Main executable: Required to start the game;
+strings.dll - Splash screen and startup error: Game will crash if missing;
+msvcr71.dll - Visual Studio C++ dependency: Game will crash if missing;
+binkw32.dll - Bink Video codec: Game will crash if missing;
+Eula.dll - User Agreement: Required to start the game;
+*patchw32 - Update assist binary by Pocket Soft, Inc: Can be removed with no issues;
+vorbisfile.dll - Used to play ogg sound files: Game will crash if missing;
+vorbis.dll - Used to read ogg codec: Game will crash if missing;
+*ebustpx.sem -Unkonwn use: Can be removed with no issues;
+config.txt - Main configuration file: Required to start the game;
