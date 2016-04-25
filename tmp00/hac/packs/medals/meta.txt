@@ -1,0 +1,4 @@
+name=Halo Reach pack
+description=Like Halo 3 but more worn down.
+api_version=1.0.0
+author=Btcc22
