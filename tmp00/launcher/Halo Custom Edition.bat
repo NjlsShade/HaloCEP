@@ -13,7 +13,7 @@ if exist "%CD%\base.dll" (
 											if not exist "%CD%\data\Documents" (
 												mkdir "%CD%\data\Documents"
 											)
-											"%CD%\base.dll" -use21
+											"%CD%\base.dll" -console -use21
 											reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft Games\Halo CE" /f
 											reg delete "HKEY_CURRENT_USER\Software\Microsoft\Microsoft Games\Halo CE" /f
 											reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft Games\Halo CE" /f

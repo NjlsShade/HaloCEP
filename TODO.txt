@@ -1,4 +1,5 @@
 HaloCEP (Sandstone) {
 	Add full files checker and retriever;
 	Add redist files installer;
+	Integrated medals and HAC config;
 }
