@@ -1,4 +1,4 @@
 HaloCEP (Sandstone) {
-	Add full files checker;
+	Add full files checker and retriever;
 	Add redist files installer;
 }
