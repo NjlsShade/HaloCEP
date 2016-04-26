@@ -2,7 +2,7 @@ HaloCEP (Sandstone) {
     Add full files checker and retriever;
     Add redist files installer;
     Integrated medals and HAC config;
-	Check if medals zip-compression affects performance;
-	Debate size of medals;
-	Finish medals pack;
+    Check if medals zip-compression affects performance;
+    Debate size of medals;
+    Finish medals pack;
 }
