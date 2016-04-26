@@ -20,7 +20,7 @@
 -KSML.xsd - Used during the setup process of Halo Custom Edition: Can be removed with no issues;
 -haloupdate.exe - Used to update Halo PC/CE: Can be removed with no issues;
 -haloupdate.cfg - Configuration file for haloupdate.exe: Can be removed with no issues;
--haloceded.exe - Halo Custom Edition Server sofware: Can be removed with no issues;
+-haloceded.exe - Halo Custom Edition Server software: Can be removed with no issues;
 -halo1.ico - Unused Halo PC/CE icon file: Can be removed with no issues;
 -GSArcade.exe - GameSpy arcade installer: Can be removed with no issues;
 -gamespy.ico - Unused GameSpy icon file: Can be removed with no issues;
