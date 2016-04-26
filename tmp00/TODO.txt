@@ -1,8 +1,10 @@
 HaloCEP (Sandstone) {
     Add full files checker and retriever;
-    Add redist files installer;
+    Add redist files installer (integrate?);
     Integrated medals and HAC config;
     Check if medals zip-compression affects performance;
     Debate size of medals;
     Finish medals pack;
+    Fix error 126 on load (only producible on CACC Gateway: Win10?);
+    Change DLL file names;
 }
