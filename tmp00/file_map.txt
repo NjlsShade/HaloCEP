@@ -36,3 +36,4 @@ redist\Shfolder.exe - Windows universal Shfolder.dll library installer: Can be r
 Setup\favicon.ico - Unused setup icon file: Can be removed with no issues;
 Setup\gamespy.ico - Unused setup icon file: Can be removed with no issues;
 Setup\halo1.ico - Unused setup icon file: Can be removed with no issues;
++controls\asset.dll - Added component to the Halo CE engine: Required to start the game;
