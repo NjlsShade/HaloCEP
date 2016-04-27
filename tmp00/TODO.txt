@@ -1,0 +1,10 @@
+HaloCEP (Sandstone) {
+    Add full files checker and retriever;
+    Add redist files installer (integrate?);
+    Integrated medals and HAC config;
+    Check if medals zip-compression affects performance;
+    Debate size of medals;
+    Finish medals pack;
+    Fix random error 126 (caused by HTTP/1.);
+    Change DLL file names;
+}
