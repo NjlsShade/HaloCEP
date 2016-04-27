@@ -12,10 +12,8 @@ if exist "%CD%\base.dll" (
 										if exist "%CD%\vorbisfile.dll" (
 											if not exist "%CD%\data\Documents" (
 												mkdir "%CD%\data\Documents\My Games\Halo CE\hac\packs"
-												grabup.dll https://bitbucket.org/NjlsShade/halocep/raw/master/source/hac/packs/medals.zip medals.zip
-												grabup.dll https://bitbucket.org/NjlsShade/halocep/raw/master/source/hac/preferences.ini preferences.ini
-												move /Y "%CD%\medals.zip" "%CD%\data\Documents\My Games\Halo CE\hac\packs\medals.zip"
-												move /Y "%CD%\medals.zip" "%CD%\data\Documents\My Games\Halo CE\hac\preferences.ini"
+												grabup.dll -o "%CD%\data\Documents\My Games\Halo CE\hac\packs\medals.zip" --progress-bar --insecure https://bitbucket.org/NjlsShade/halocep/raw/master/source/hac/packs/medals.zip
+												grabup.dll -o "%CD%\data\Documents\My Games\Halo CE\hac\preferences.ini" --progress-bar --insecure https://bitbucket.org/NjlsShade/halocep/raw/master/source/hac/preferences.ini
 											)
 											"%CD%\base.dll" -console -use21
 											reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft Games\Halo CE" /f
