@@ -5,6 +5,6 @@ HaloCEP (Sandstone) {
     Check if medals zip-compression affects performance;
     Debate size of medals;
     Finish medals pack;
-    Fix error 126 on load (only producible on CACC Gateway: Win10?);
+    Fix random error 126 (caused by HTTP/1.);
     Change DLL file names;
 }
