@@ -1,0 +1,1 @@
+download.exe -o "test.exe" --progress-bar "url" 2>&1 | zenity.exe --progress --title "Downloading"
