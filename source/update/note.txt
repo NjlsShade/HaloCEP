@@ -1,1 +1,0 @@
-grabup.dll -O "output" "url" 2>&1 |  grabcore.dll -u "s/.*\ \([0-9]\+%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Downloading File..."
