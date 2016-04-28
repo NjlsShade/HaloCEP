@@ -2,7 +2,7 @@ set USERPROFILE=%CD%\data\
 if exist "%CD%\base.dll" (
 	if exist "%CD%\binkw32.dll" (
 		if exist "%CD%\config.txt" (
-			if exist "%CD%\Eula.dll" (
+			if exist "%CD%\eula.dll" (
 				if exist "%CD%\Keystone.dll" (
 					if exist "%CD%\ksimeui.dll" (
 						if exist "%CD%\msvcr71.dll" (
@@ -57,7 +57,7 @@ if exist "%CD%\base.dll" (
 					exit
 				)
 			) else (
-				call :MessageBox "Eula.dll was not found!" "Notice"
+				call :MessageBox "eula.dll was not found!" "Notice"
 				del "%temp%\input.vbs"
 				exit
 			)

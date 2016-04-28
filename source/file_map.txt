@@ -5,7 +5,7 @@
  strings.dll - Splash screen and startup error: Game will crash if missing;
  msvcr71.dll - Visual Studio C++ dependency: Game will crash if missing;
  binkw32.dll - Bink Video codec: Game will crash if missing;
- Eula.dll - End User License Agreement dialog: Required to start the game;
+*[eula.dll]Eula.dll - End User License Agreement dialog: Required to start the game;
 -patchw32 - Update assist binary by Pocket Soft, Inc: Can be removed with no issues;
  vorbisfile.dll - Used to play ogg sound files: Game will crash if missing;
  vorbis.dll - Used to read ogg codec: Game will crash if missing;
