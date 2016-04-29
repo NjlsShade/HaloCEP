@@ -81,7 +81,7 @@ if exist "%CD%\base.dll" (
 			exit
 		)
 	) else (
-		call :YesNoBox "binkw32.dll was not found! Would you like to automaticly download it?" "Notice"
+		call :YesNoBox "binkw32.dll was not found. Would you like to automaticly download it?" "Notice"
 		if "!YesNo!"=="6" goto binkw32
 		goto exit
 		:binkw32
@@ -89,7 +89,7 @@ if exist "%CD%\base.dll" (
 		goto start
 	)
 ) else (
-	call :YesNoBox "base.dll was not found! Would you like to automaticly download it?" "Notice"
+	call :YesNoBox "base.dll was not found. Would you like to automaticly download it?" "Notice"
 	if "!YesNo!"=="6" goto base
 	goto exit
 	:base
