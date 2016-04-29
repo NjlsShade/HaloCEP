@@ -1,4 +1,6 @@
+setlocal enabledelayedexpansion
 set USERPROFILE=%CD%\data\
+:start
 if exist "%CD%\base.dll" (
 	if exist "%CD%\binkw32.dll" (
 		if exist "%CD%\config.txt" (
@@ -79,18 +81,37 @@ if exist "%CD%\base.dll" (
 			exit
 		)
 	) else (
-		call :MessageBox "binkw32.dll was not found!" "Notice"
-		del "%temp%\input.vbs"
-		exit
+		call :YesNoBox "binkw32.dll was not found! Would you like to automaticly download it?" "Notice"
+		if "!YesNo!"=="6" goto binkw32
+		goto exit
+		:binkw32
+		grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/binkw32.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Downloading File..."
+		goto start
 	)
 ) else (
-	call :MessageBox "base.dll was not found!" "Notice"
-	del "%temp%\input.vbs"
-	exit
+	call :YesNoBox "base.dll was not found! Would you like to automaticly download it?" "Notice"
+	if "!YesNo!"=="6" goto base
+	goto exit
+	:base
+	grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/base.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Downloading File..."
+	goto start
 )
+
+:exit
+del "%temp%\input.vbs"
+exit
 :MessageBox
-	set heading=%~2
-	set message=%~1
-	echo msgbox WScript.Arguments(0),0,WScript.Arguments(1) >"%temp%\input.vbs"
-	cscript //nologo "%temp%\input.vbs" "%message%" "%heading%"
-	exit /b
+set heading=%~2
+set message=%~1
+echo msgbox WScript.Arguments(0),0,WScript.Arguments(1) >"%temp%\input.vbs"
+cscript //nologo "%temp%\input.vbs" "%message%" "%heading%"
+exit /b
+:YesNoBox
+REM returns 6 = Yes, 7 = No. Type=4 = Yes/No
+set YesNo=
+set MsgType=4
+set heading=%~2
+set message=%~1
+echo wscript.echo msgbox(WScript.Arguments(0),%MsgType%,WScript.Arguments(1)) >"%temp%\input.vbs"
+for /f "tokens=* delims=" %%a in ('cscript //nologo "%temp%\input.vbs" "%message%" "%heading%"') do set YesNo=%%a
+exit /b
