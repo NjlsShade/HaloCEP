@@ -16,8 +16,8 @@ if exist "%CD%\base.dll" (
 												if exist "%CD%\grabcore.dll" (
 													if not exist "%CD%\data\Documents" (
 														mkdir "%CD%\data\Documents\My Games\Halo CE\hac\packs"
-														grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\hac\packs\medals.zip" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/hac/packs/medals.zip" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Downloading File..."
-														grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\hac\preferences.ini" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/hac/preferences.ini" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Downloading File..."
+														grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\hac\packs\medals.zip" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/hac/packs/medals.zip" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing medals.zip"
+														grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\hac\preferences.ini" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/hac/preferences.ini" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing preferences.ini"
 													)
 													"%CD%\base.dll" -console -use21
 													reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft Games\Halo CE" /f
@@ -85,7 +85,7 @@ if exist "%CD%\base.dll" (
 		if "!YesNo!"=="6" goto binkw32
 		goto exit
 		:binkw32
-		grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/binkw32.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Downloading File..."
+		grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/binkw32.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing binkw32.dll"
 		goto start
 	)
 ) else (
@@ -93,7 +93,7 @@ if exist "%CD%\base.dll" (
 	if "!YesNo!"=="6" goto base
 	goto exit
 	:base
-	grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/base.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Downloading File..."
+	grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/base.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing base.dll"
 	goto start
 )
 
