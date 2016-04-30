@@ -27,6 +27,12 @@ function display(message, name, sound, low_priority)
 	display_medal(name)
 end
 
+function gfx_display(message, name, low_priority)
+	low_priority = low_priority or false 
+	hud_message(message)
+	display_medal(name)
+end
+
 function map_load()
 	kills = 0;
 	deaths = 0;
@@ -61,7 +67,7 @@ end
 
 function ctf_events(event, killer, victim, player, timestamp)
 	if(event == 33) then
-			display("Flag Captured!", "images/flag_score.png")
+			gfx_display("Flag Captured!", "images/flag_score.png")
 	end
 end
 
