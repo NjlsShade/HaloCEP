@@ -5,7 +5,7 @@
  strings.dll - Splash screen and startup error: Game will crash if missing;
  msvcr71.dll - Visual Studio C++ dependency: Game will crash if missing;
  binkw32.dll - Bink Video codec: Game will crash if missing;
- Eula.dll - End User License Agreement dialog: Required to start the game;
+*[eula.dll]Eula.dll - End User License Agreement dialog: Required to start the game;
 -patchw32 - Update assist binary by Pocket Soft, Inc: Can be removed with no issues;
  vorbisfile.dll - Used to play ogg sound files: Game will crash if missing;
  vorbis.dll - Used to read ogg codec: Game will crash if missing;
@@ -37,3 +37,9 @@ Setup\favicon.ico - Unused setup icon file: Can be removed with no issues;
 Setup\gamespy.ico - Unused setup icon file: Can be removed with no issues;
 Setup\halo1.ico - Unused setup icon file: Can be removed with no issues;
 +controls\asset.dll - Added component to the Halo CE engine: Required to start the game;
++dialog.dll - Used to display update dialogs: Required to start the game;
++grabcore.dll - Used to filter information for dialog.dll: Required to start the game;
++grabup.dll - Used to download updates and repair missing or corrupt files: Required to start the game;
++libiconv2.dll - Dependency library for grabcore.dll: Required to start the game;
++libintl3.dll - Dependency library for grabcore.dll: Required to start the game;
++regex2.dll - Dependency library for grabcore.dll: Required to start the game;

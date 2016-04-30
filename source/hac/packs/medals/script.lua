@@ -61,7 +61,7 @@ end
 
 function ctf_events(event, killer, victim, player, timestamp)
 	if(event == 33) then
-			display("Flag Captured!", "images/flag_score.png", "audio/flag_captured.mp3")
+			display("Flag Captured!", "images/flag_score.png")
 	end
 end
 
