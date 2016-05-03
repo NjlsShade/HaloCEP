@@ -74,6 +74,7 @@ function ctf_events(event, killer, victim, player, timestamp)
 			gfx_display("Flag Runner!", "images/flag_runner.png")
 		elseif(captures >= 3) then
 			gfx_display("Flag Champion!", "images/flag_champion.png")
+		end
 	end
 end
 
