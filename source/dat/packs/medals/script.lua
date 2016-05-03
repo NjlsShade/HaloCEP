@@ -10,6 +10,8 @@ lastDeath = 0
 spreeCounters = {}
 lastKillTimes = {}
 captures = 0
+deathSpree = 0
+queued = 0
 
 function register_callbacks()
 	mute_announcer()
