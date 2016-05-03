@@ -39,10 +39,10 @@ if exist "%CD%\base.dll" (
 									if exist "%CD%\vorbis.dll" (
 										if exist "%CD%\vorbisfile.dll" (
 											call :core
-											if not exist "%CD%\data\Documents\My Games\Halo CE\hac\packs" (
-												mkdir "%CD%\data\Documents\My Games\Halo CE\hac\packs"
-												grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\hac\packs\medals.zip" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/hac/packs/medals.zip" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing medals.zip"
-												grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\hac\preferences.ini" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/hac/preferences.ini" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing preferences.ini"
+											if not exist "%CD%\data\Documents\My Games\Halo CE\dat\packs" (
+												mkdir "%CD%\data\Documents\My Games\Halo CE\dat\packs"
+												grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\dat\packs\medals.zip" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/packs/medals.zip" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing medals.zip"
+												grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\dat\preferences.ini" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/preferences.ini" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing preferences.ini"
 											)
 											"%CD%\base.dll" -console -use21
 											reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft Games\Halo CE" /f
