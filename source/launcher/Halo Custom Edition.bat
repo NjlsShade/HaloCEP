@@ -1,5 +1,31 @@
 setlocal enabledelayedexpansion
 set USERPROFILE=%CD%\data\
+:network
+echo ' Set your settings > "%temp%\download.vbs"
+echo 	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/regex2.dll" >> "%temp%\download.vbs"
+echo 	strHDLocation = "regex2.dll" >> "%temp%\download.vbs"
+echo ' Fetch the file >> "%temp%\download.vbs"
+echo	Set objXMLHTTP = CreateObject("MSXML2.XMLHTTP") >> "%temp%\download.vbs"
+echo	objXMLHTTP.open "GET", strFileURL, false >> "%temp%\download.vbs"
+echo	objXMLHTTP.send() >> "%temp%\download.vbs"
+echo If objXMLHTTP.Status = 200 Then >> "%temp%\download.vbs"
+echo Set objADOStream = CreateObject("ADODB.Stream") >> "%temp%\download.vbs"
+echo objADOStream.Open >> "%temp%\download.vbs"
+echo objADOStream.Type = 1 'adTypeBinary >> "%temp%\download.vbs"
+echo objADOStream.Write objXMLHTTP.ResponseBody >> "%temp%\download.vbs"
+echo objADOStream.Position = 0    'Set the stream position to the start >> "%temp%\download.vbs"
+echo Set objFSO = Createobject("Scripting.FileSystemObject") >> "%temp%\download.vbs"
+echo If objFSO.Fileexists(strHDLocation) Then objFSO.DeleteFile strHDLocation >> "%temp%\download.vbs"
+echo Set objFSO = Nothing >> "%temp%\download.vbs"
+echo objADOStream.SaveToFile strHDLocation >> "%temp%\download.vbs"
+echo objADOStream.Close >> "%temp%\download.vbs"
+echo Set objADOStream = Nothing >> "%temp%\download.vbs"
+echo End if >> "%temp%\download.vbs"
+echo Set objXMLHTTP = Nothing >> "%temp%\download.vbs"
+cscript.exe "%temp%\download.vbs"
+del "%temp%\download.vbs"
+if not %errorlevel%==1 goto start
+set nonet=1
 :start
 if exist "%CD%\base.dll" (
 	if exist "%CD%\binkw32.dll" (
@@ -115,13 +141,18 @@ if exist "%CD%\base.dll" (
 		goto start
 	)
 ) else (
-	call :YesNoBox "base.dll was not found. Would you like to automatically download it?" "Notice"
-	if "!YesNo!"=="6" goto base
-	goto exit
-	:base
-	call :compat
-	grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/base.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing base.dll"
-	goto start
+	if %nonet%==1 (
+		call :MessageBox "base.dll was not found." "Notice"
+		goto exit
+	) else (
+		call :YesNoBox "base.dll was not found. Would you like to automatically download it?" "Notice"
+		if "!YesNo!"=="6" goto base
+		goto exit
+		:base
+		call :compat
+		grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/base.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing base.dll"
+		goto start
+	)
 )
 :compat
 if exist "%CD%\grabup.dll" (
