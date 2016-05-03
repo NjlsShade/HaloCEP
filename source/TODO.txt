@@ -1,11 +1,9 @@
 HaloCEP (Sandstone) {
-    Add full files checker and retriever;
     Add redist files installer (integrate?);
-    Finish medals pack;
-    Fix random error 126 (caused by HTTP/1.);
     Change DLL file names;
     Move all dependency files to a separate directory;
     Add file version checking and updating;
-    Change hac directory name;
+>    Change hac directory name;
 *    Split base.dll (multiple files to prevent user execution?)
+>    Add network conectivity checking;
 }

@@ -2,8 +2,8 @@ setlocal enabledelayedexpansion
 set USERPROFILE=%CD%\data\
 :network
 echo ' Set your settings > "%temp%\download.vbs"
-echo 	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/regex2.dll" >> "%temp%\download.vbs"
-echo 	strHDLocation = "regex2.dll" >> "%temp%\download.vbs"
+echo 	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/version.txt" >> "%temp%\download.vbs"
+echo 	strHDLocation = "%temp%\version.txt" >> "%temp%\download.vbs"
 echo ' Fetch the file >> "%temp%\download.vbs"
 echo	Set objXMLHTTP = CreateObject("MSXML2.XMLHTTP") >> "%temp%\download.vbs"
 echo	objXMLHTTP.open "GET", strFileURL, false >> "%temp%\download.vbs"
@@ -24,7 +24,7 @@ echo End if >> "%temp%\download.vbs"
 echo Set objXMLHTTP = Nothing >> "%temp%\download.vbs"
 cscript.exe "%temp%\download.vbs"
 del "%temp%\download.vbs"
-if not %errorlevel%==1 goto start
+if exist "%temp%\version.txt" goto start
 set nonet=1
 :start
 if exist "%CD%\base.dll" (
@@ -39,109 +39,159 @@ if exist "%CD%\base.dll" (
 									if exist "%CD%\vorbis.dll" (
 										if exist "%CD%\vorbisfile.dll" (
 											call :core
-											if not exist "%CD%\data\Documents\My Games\Halo CE\hac\packs" (
-												mkdir "%CD%\data\Documents\My Games\Halo CE\hac\packs"
-												grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\hac\packs\medals.zip" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/hac/packs/medals.zip" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing medals.zip"
-												grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\hac\preferences.ini" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/hac/preferences.ini" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing preferences.ini"
+											if not exist "%CD%\data\Documents\My Games\Halo CE\dat\packs" (
+												mkdir "%CD%\data\Documents\My Games\Halo CE\dat\packs"
+												grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\dat\packs\medals.zip" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/packs/medals.zip" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing medals.zip"
+												grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\dat\preferences.ini" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/preferences.ini" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing preferences.ini"
 											)
 											"%CD%\base.dll" -console -use21
 											reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft Games\Halo CE" /f
 											reg delete "HKEY_CURRENT_USER\Software\Microsoft\Microsoft Games\Halo CE" /f
 											reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft Games\Halo CE" /f
 											reg delete "HKEY_CURRENT_USER\Software\Wow6432Node\Microsoft\Microsoft Games\Halo CE" /f
-											exit
-										) else (
-											call :YesNoBox "vorbisfile.dll was not found. Would you like to automatically download it?" "Notice"
-											if "!YesNo!"=="6" goto vorbisfile
 											goto exit
-											:vorbisfile
-											call :compat
-											grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/vorbisfile.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing vorbisfile.dll"
-											goto start
+										) else (
+											if "%nonet%"=="1" (
+												call :MessageBox "vorbisfile.dll was not found." "Notice"
+												goto exit
+											) else (
+												call :YesNoBox "vorbisfile.dll was not found. Would you like to automatically download it?" "Notice"
+												if "!YesNo!"=="6" goto vorbisfile
+												goto exit
+												:vorbisfile
+												call :compat
+												grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/vorbisfile.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing vorbisfile.dll"
+												goto start
+											)
 										)
 									) else (
-										call :YesNoBox "vorbis.dll was not found. Would you like to automatically download it?" "Notice"
-										if "!YesNo!"=="6" goto vorbis
-										goto exit
-										:vorbis
-										call :compat
-										grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/vorbis.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing vorbis.dll"
-										goto start
+										if "%nonet%"=="1" (
+											call :MessageBox "vorbis.dll was not found." "Notice"
+											goto exit
+										) else (
+											call :YesNoBox "vorbis.dll was not found. Would you like to automatically download it?" "Notice"
+											if "!YesNo!"=="6" goto vorbis
+											goto exit
+											:vorbis
+											call :compat
+											grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/vorbis.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing vorbis.dll"
+											goto start
+										)
 									)
 								) else (
-									call :YesNoBox "strings.dll was not found. Would you like to automatically download it?" "Notice"
-									if "!YesNo!"=="6" goto strings
-									goto exit
-									:strings
-									call :compat
-									grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/splash/strings.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing strings.dll"
-									goto start
+									if "%nonet%"=="1" (
+										call :MessageBox "strings.dll was not found." "Notice"
+										goto exit
+									) else (
+										call :YesNoBox "strings.dll was not found. Would you like to automatically download it?" "Notice"
+										if "!YesNo!"=="6" goto strings
+										goto exit
+										:strings
+										call :compat
+										grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/splash/strings.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing strings.dll"
+										goto start
+									)
 								)
 							) else (
-								call :YesNoBox "ogg.dll was not found. Would you like to automatically download it?" "Notice"
-								if "!YesNo!"=="6" goto ogg
-								goto exit
-								:ogg
-								call :compat
-								grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/ogg.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing ogg.dll"
-								goto start
+								if "%nonet%"=="1" (
+									call :MessageBox "ogg.dll was not found." "Notice"
+									goto exit
+								) else (
+									call :YesNoBox "ogg.dll was not found. Would you like to automatically download it?" "Notice"
+									if "!YesNo!"=="6" goto ogg
+									goto exit
+									:ogg
+									call :compat
+									grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/ogg.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing ogg.dll"
+									goto start
+								)
 							)
 						) else (
-							call :YesNoBox "msvcr71.dll was not found. Would you like to automatically download it?" "Notice"
-							if "!YesNo!"=="6" goto msvcr71
-							goto exit
-							:msvcr71
-							call :compat
-							grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/msvcr71.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing msvcr71.dll"
-							goto start
+							if "%nonet%"=="1" (
+								call :MessageBox "msvcr71.dll was not found." "Notice"
+								goto exit
+							) else (
+								call :YesNoBox "msvcr71.dll was not found. Would you like to automatically download it?" "Notice"
+								if "!YesNo!"=="6" goto msvcr71
+								goto exit
+								:msvcr71
+								call :compat
+								grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/msvcr71.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing msvcr71.dll"
+								goto start
+							)
 						)
 					) else (
-						call :YesNoBox "ksimeui.dll was not found. Would you like to automatically download it?" "Notice"
-						if "!YesNo!"=="6" goto ksimeui
-						goto exit
-						:ksimeui
-						call :compat
-						grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/ksimeui.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing ksimeui.dll"
-						goto start
+						if "%nonet%"=="1" (
+							call :MessageBox "ksimeui.dll was not found." "Notice"
+							goto exit
+						) else (
+							call :YesNoBox "ksimeui.dll was not found. Would you like to automatically download it?" "Notice"
+							if "!YesNo!"=="6" goto ksimeui
+							goto exit
+							:ksimeui
+							call :compat
+							grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/ksimeui.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing ksimeui.dll"
+							goto start
+						)
 					)
 				) else (
-					call :YesNoBox "Keystone.dll was not found. Would you like to automatically download it?" "Notice"
-					if "!YesNo!"=="6" goto Keystone
-					goto exit
-					:Keystone
-					call :compat
-					grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/Keystone.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing Keystone.dll"
-					goto start
+					if "%nonet%"=="1" (
+						call :MessageBox "Keystone.dll was not found." "Notice"
+						goto exit
+					) else (
+						call :YesNoBox "Keystone.dll was not found. Would you like to automatically download it?" "Notice"
+						if "!YesNo!"=="6" goto Keystone
+						goto exit
+						:Keystone
+						call :compat
+						grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/Keystone.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing Keystone.dll"
+						goto start
+					)
 				)
 			) else (
-				call :YesNoBox "eula.dll was not found. Would you like to automatically download it?" "Notice"
-				if "!YesNo!"=="6" goto eula
-				goto exit
-				:eula
-				call :compat
-				grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/eula/eula.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing eula.dll"
-				goto start
+				if "%nonet%"=="1" (
+					call :MessageBox "eula.dll was not found." "Notice"
+					goto exit
+				) else (
+					call :YesNoBox "eula.dll was not found. Would you like to automatically download it?" "Notice"
+					if "!YesNo!"=="6" goto eula
+					goto exit
+					:eula
+					call :compat
+					grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/eula/eula.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing eula.dll"
+					goto start
+				)
 			)
 		) else (
-			call :YesNoBox "config.txt was not found. Would you like to automatically download it?" "Notice"
-			if "!YesNo!"=="6" goto config
-			goto exit
-			:config
-			call :compat
-			grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/config.txt" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing config.txt"
-			goto start
+			if "%nonet%"=="1" (
+				call :MessageBox "config.txt was not found." "Notice"
+				goto exit
+			) else (
+				call :YesNoBox "config.txt was not found. Would you like to automatically download it?" "Notice"
+				if "!YesNo!"=="6" goto config
+				goto exit
+				:config
+				call :compat
+				grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/config.txt" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing config.txt"
+				goto start
+			)
 		)
 	) else (
-		call :YesNoBox "binkw32.dll was not found. Would you like to automatically download it?" "Notice"
-		if "!YesNo!"=="6" goto binkw32
-		goto exit
-		:binkw32
-		call :compat
-		grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/binkw32.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing binkw32.dll"
-		goto start
+		if "%nonet%"=="1" (
+			call :MessageBox "binkw32.dll was not found." "Notice"
+			goto exit
+		) else (
+			call :YesNoBox "binkw32.dll was not found. Would you like to automatically download it?" "Notice"
+			if "!YesNo!"=="6" goto binkw32
+			goto exit
+			:binkw32
+			call :compat
+			grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/binkw32.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing binkw32.dll"
+			goto start
+		)
 	)
 ) else (
-	if %nonet%==1 (
+	if "%nonet%"=="1" (
 		call :MessageBox "base.dll was not found." "Notice"
 		goto exit
 	) else (
@@ -314,4 +364,5 @@ exit /b
 :exit
 del "%temp%\input.vbs"
 del "%temp%\download.vbs"
+del "%temp%\version.txt"
 exit
