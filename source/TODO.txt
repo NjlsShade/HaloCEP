@@ -5,4 +5,6 @@ HaloCEP (Sandstone) {
     Add file version checking and updating;
 *    Split base.dll (multiple files to prevent user execution?)
 >    Add network connectivity checking;
+    Refine medal's images;
+*    Change medal's announcer;
 }
