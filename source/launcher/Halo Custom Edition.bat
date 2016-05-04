@@ -1,5 +1,9 @@
 setlocal enabledelayedexpansion
 set USERPROFILE=%CD%\data\
+if exist "%CD%\config\update_lock.ns" (
+	set /p lock="%CD%\config\update_lock.ns"
+)
+set lock=0
 :network
 echo ' Set your settings > "%temp%\download.vbs"
 echo 	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/version.txt" >> "%temp%\download.vbs"
@@ -24,10 +28,32 @@ echo End if >> "%temp%\download.vbs"
 echo Set objXMLHTTP = Nothing >> "%temp%\download.vbs"
 cscript.exe "%temp%\download.vbs"
 del "%temp%\download.vbs"
-if exist "%temp%\version.txt" goto start
+if exist "%temp%\version.txt" (
+	if not exist "%CD%\data\Documents\My Games\Halo CE\dat\packs\medals.zip" (
+		mkdir "%CD%\data\Documents\My Games\Halo CE\dat\packs"
+		grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\dat\packs\medals.zip" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/packs/medals.zip" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing medals.zip"
+		grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\dat\preferences.ini" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/preferences.ini" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing preferences.ini"
+	)
+	if exist "%CD%\data\Documents\My Games\Halo CE\dat\versions\core.ns" (
+		if "%lock%"=="1" goto start
+	)
+	goto ver
+)
+:nonet
 set nonet=1
 :start
 if exist "%CD%\base.dll" (
+	if not "%nonet%"=="1" (
+		if "%lock%"=="1" (
+			grabcore.dll -n "/a/p" "%temp%\version.txt" | grabcore.dll "s/\<a\>//g" | grabcore.dll "s/ //g" > "%temp%\base.txt"
+			if "%temp%\base.txt" gtr "%CD%\data\Documents\My Games\Halo CE\dat\versions\base.ns" (
+				del "%CD%\base.dll"
+				grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/base.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing base.dll"
+			)
+		)
+		del "%CD%\base.dll"
+		grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/base.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing base.dll"
+	)
 	if exist "%CD%\binkw32.dll" (
 		if exist "%CD%\config.txt" (
 			if exist "%CD%\eula.dll" (
@@ -39,11 +65,6 @@ if exist "%CD%\base.dll" (
 									if exist "%CD%\vorbis.dll" (
 										if exist "%CD%\vorbisfile.dll" (
 											call :core
-											if not exist "%CD%\data\Documents\My Games\Halo CE\dat\packs" (
-												mkdir "%CD%\data\Documents\My Games\Halo CE\dat\packs"
-												grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\dat\packs\medals.zip" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/packs/medals.zip" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing medals.zip"
-												grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\dat\preferences.ini" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/preferences.ini" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing preferences.ini"
-											)
 											"%CD%\base.dll" -console -use21
 											reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft Games\Halo CE" /f
 											reg delete "HKEY_CURRENT_USER\Software\Microsoft\Microsoft Games\Halo CE" /f
@@ -346,6 +367,68 @@ if not exist "%CD%\regex2.dll" (
 	del "%temp%\download.vbs"
 )
 exit /b
+:ver
+call :YesNoBox "A full update is needed. Would you like to automatically update now?" "Notice"
+if "!YesNo!"=="6" goto upgrade
+:upgrade
+echo ' Set your settings > "%temp%\download.vbs"
+echo 	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/versions.ns" >> "%temp%\download.vbs"
+echo 	strHDLocation = "%temp%\versions.ns" >> "%temp%\download.vbs"
+echo ' Fetch the file >> "%temp%\download.vbs"
+echo	Set objXMLHTTP = CreateObject("MSXML2.XMLHTTP") >> "%temp%\download.vbs"
+echo	objXMLHTTP.open "GET", strFileURL, false >> "%temp%\download.vbs"
+echo	objXMLHTTP.send() >> "%temp%\download.vbs"
+echo If objXMLHTTP.Status = 200 Then >> "%temp%\download.vbs"
+echo Set objADOStream = CreateObject("ADODB.Stream") >> "%temp%\download.vbs"
+echo objADOStream.Open >> "%temp%\download.vbs"
+echo objADOStream.Type = 1 'adTypeBinary >> "%temp%\download.vbs"
+echo objADOStream.Write objXMLHTTP.ResponseBody >> "%temp%\download.vbs"
+echo objADOStream.Position = 0    'Set the stream position to the start >> "%temp%\download.vbs"
+echo Set objFSO = Createobject("Scripting.FileSystemObject") >> "%temp%\download.vbs"
+echo If objFSO.Fileexists(strHDLocation) Then objFSO.DeleteFile strHDLocation >> "%temp%\download.vbs"
+echo Set objFSO = Nothing >> "%temp%\download.vbs"
+echo objADOStream.SaveToFile strHDLocation >> "%temp%\download.vbs"
+echo objADOStream.Close >> "%temp%\download.vbs"
+echo Set objADOStream = Nothing >> "%temp%\download.vbs"
+echo End if >> "%temp%\download.vbs"
+echo Set objXMLHTTP = Nothing >> "%temp%\download.vbs"
+cscript.exe "%temp%\download.vbs"
+del "%temp%\download.vbs"
+if not exist "%temp%\versions.ns" goto nonet
+mkdir "%CD%\data\Documents\My Games\Halo CE\dat\versions"
+spread.dll x "%temp%\versions.ns" -aoa -y -o"%CD%\data\Documents\My Games\Halo CE\dat\versions"
+del "%CD%\base.dll"
+del "%CD%\binkw32.dll"
+del "%CD%\config.txt"
+del "%CD%\dialog.dll"
+del "%CD%\eula.dll"
+del "%CD%\grabcore.dll"
+del "%CD%\grabup.dll"
+del "%CD%\Keystone.dll"
+del "%CD%\ksimeui.dll"
+del "%CD%\libiconv2.dll"
+del "%CD%\libintl3.dll"
+del "%CD%\msvcr71.dll"
+del "%CD%\ogg.dll"
+del "%CD%\regex2.dll"
+del "%CD%\strings.dll"
+del "%CD%\vorbis.dll"
+del "%CD%\vorbisfile.dll"
+call :compat
+grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/base.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing base.dll"
+grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/binkw32.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing binkw32.dll"
+grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/config.txt" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing config.txt"
+grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/eula/eula.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing eula.dll"
+grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/Keystone.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing Keystone.dll"
+grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/ksimeui.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing ksimeui.dll"
+grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/msvcr71.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing msvcr71.dll"
+grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/ogg.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing ogg.dll"
+grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/splash/strings.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing strings.dll"
+grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/vorbis.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing vorbis.dll"
+grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/vorbisfile.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing vorbisfile.dll"
+mkdir "%CD%\data\config"
+echo "1" > "%CD%\data\config\update_lock.ns"
+goto start
 :MessageBox
 set heading=%~2
 set message=%~1

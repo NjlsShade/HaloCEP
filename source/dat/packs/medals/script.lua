@@ -10,6 +10,8 @@ lastDeath = 0
 spreeCounters = {}
 lastKillTimes = {}
 captures = 0
+deathSpree = 0
+queued = 0
 
 function register_callbacks()
 	mute_announcer()
@@ -44,6 +46,7 @@ function map_load()
 	spreeCounters = {}
 	lastKillTimes = {}
 	captures = 0
+	deathSpree = 0
 end
 
 function game_over()
@@ -67,18 +70,34 @@ end
 
 function ctf_events(event, killer, victim, player, timestamp)
 	if(event == 33) then
+		captures = captures + 1
+		if(captures == 1) then
 			gfx_display("Flag Captured!", "images/flag_score.png")
+		elseif(captures == 2) then
+			gfx_display("Flag Runner!", "images/flag_runner.png")
+		elseif(captures >= 3) then
+			gfx_display("Flag Champion!", "images/flag_champion.png")
+		end
 	end
 end
 
 function player_kills(event, killer, victim, player, timestamp)
 	if(killer == player) then
+		queued = 0
+		spree = spree + 1
+		kills = kills + 1
+		
+		if(deathSpree >= 3) then
+			gfx_display("Comeback!", "images/comeback.png")
+		else
+			killDisplay = false
+		end
+
+		deathSpree = 0
+		
 		if(lastKillTimes[victim] ~= nil and timestamp - lastKillTimes[victim] <= 700 and victim ~= player) then
 			display("Avenger!", "images/avenger.png", "audio/hologram.mp3", true)
 		end
-
-		spree = spree + 1
-		kills = kills + 1
 		
 		if(spreeCounters[victim] ~= nil and spreeCounters[victim] >= 5) then
 			display("Killjoy!", "images/killjoy.png", "audio/killjoy.mp3")
@@ -153,6 +172,7 @@ function player_kills(event, killer, victim, player, timestamp)
 		lastDeath = timestamp
 		spree = 0
 		deaths = deaths + 1
+		deathSpree = deathSpree + 1
 	else
 		spreeCounters[victim] = 0
 	end
