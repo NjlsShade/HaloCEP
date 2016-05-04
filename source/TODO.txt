@@ -3,7 +3,6 @@ HaloCEP (Sandstone) {
     Change DLL file names;
     Move all dependency files to a separate directory;
     Add file version checking and updating;
->    Change hac directory name;
 *    Split base.dll (multiple files to prevent user execution?)
->    Add network conectivity checking;
+>    Add network connectivity checking;
 }

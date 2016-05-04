@@ -46,6 +46,7 @@ function map_load()
 	spreeCounters = {}
 	lastKillTimes = {}
 	captures = 0
+	deathSpree = 0
 end
 
 function game_over()
@@ -84,6 +85,7 @@ function player_kills(event, killer, victim, player, timestamp)
 	if(killer == player) then
 		queued = 0
 		spree = spree + 1
+		kills = kills + 1
 		
 		if(deathSpree >= 3) then
 			gfx_display("Comeback!", "images/comeback.png")
@@ -96,9 +98,6 @@ function player_kills(event, killer, victim, player, timestamp)
 		if(lastKillTimes[victim] ~= nil and timestamp - lastKillTimes[victim] <= 700 and victim ~= player) then
 			display("Avenger!", "images/avenger.png", "audio/hologram.mp3", true)
 		end
-
-		spree = spree + 1
-		kills = kills + 1
 		
 		if(spreeCounters[victim] ~= nil and spreeCounters[victim] >= 5) then
 			display("Killjoy!", "images/killjoy.png", "audio/killjoy.mp3")
@@ -173,6 +172,7 @@ function player_kills(event, killer, victim, player, timestamp)
 		lastDeath = timestamp
 		spree = 0
 		deaths = deaths + 1
+		deathSpree = deathSpree + 1
 	else
 		spreeCounters[victim] = 0
 	end

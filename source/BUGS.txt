@@ -1,4 +1,3 @@
 HaloCEP (Sandstone) {
     Medals do not match changed resolution until the game is restarted;
-    dll error 126 at random;
 }
