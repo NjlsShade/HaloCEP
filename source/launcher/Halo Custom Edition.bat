@@ -46,9 +46,12 @@ set /p base= < "%CD%\data\Documents\My Games\Halo CE\dat\versions\base.ns"
 if exist "%CD%\base.dll" (
 	if not "%nonet%"=="1" (
 		if "%basecon%" gtr "%base%" (
-			del "%CD%\base.dll"
-			grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/base.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing base.dll"
-			move /Y "%temp%\base.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\base.ns"
+			call :YesNoBox "An update is needed for base.dll. Would you like to download it now?" "Update"
+			if "!YesNo!"=="6" (
+				del "%CD%\base.dll"
+				grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/base.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing base.dll"
+				move /Y "%temp%\base.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\base.ns"
+			)
 		)
 	)
 	if exist "%CD%\binkw32.dll" (
