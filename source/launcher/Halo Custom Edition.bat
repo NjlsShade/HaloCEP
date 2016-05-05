@@ -39,7 +39,7 @@ if exist "%temp%\version.txt" (
 set nonet=1
 goto start
 :var
-grabcore.dll -n "/a/p" "%temp%\version.txt" | grabcore.dll "s/\<a\>//g" | grabcore.dll "s/ //g" > "%temp%\base.txt"
+grabcore.dll -n "/a/p" "%temp%\version.txt" | grabcore.dll "s/\<base\>//g" | grabcore.dll "s/ //g" > "%temp%\base.txt"
 set /p basecon= < "%temp%\base.txt"
 set /p base= < "%CD%\data\Documents\My Games\Halo CE\dat\versions\base.ns"
 :start
