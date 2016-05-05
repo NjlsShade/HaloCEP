@@ -2,9 +2,10 @@ HaloCEP (Sandstone) {
     Add redist files installer (integrate?);
     Change DLL file names;
     Move all dependency files to a separate directory;
-    Add file version checking and updating;
+>    Add file version checking and updating;
 *    Split base.dll (multiple files to prevent user execution?)
 >    Add network connectivity checking;
     Refine medal's images;
 *    Change medal's announcer;
+    Change %temp% directory;
 }
