@@ -65,19 +65,35 @@ if exist "%CD%\base.dll" (
 									if exist "%CD%\vorbis.dll" (
 										if exist "%CD%\vorbisfile.dll" (
 											if exist "%CD%\spread.dll" (
-												call :core
-												if not exist "%CD%\data\Documents\My Games\Halo CE\dat\packs\medals.zip" (
-													mkdir "%CD%\data\Documents\My Games\Halo CE\dat\packs"
-													call :compat
-													grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\dat\packs\medals.zip" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/packs/medals.zip" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing medals.zip"
-													grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\dat\preferences.ini" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/preferences.ini" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing preferences.ini"
+												if exist "%CD%\dat.dll" (
+													call :core
+													if not exist "%CD%\data\Documents\My Games\Halo CE\dat\packs\medals.zip" (
+														mkdir "%CD%\data\Documents\My Games\Halo CE\dat\packs"
+														call :compat
+														grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\dat\packs\medals.zip" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/packs/medals.zip" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing medals.zip"
+														grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\dat\preferences.ini" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/preferences.ini" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing preferences.ini"
+													)
+													copy /Y "%CD%\dat.dll" "%temp%\dat.dll"
+													"%CD%\base.dll" -console -use21
+													reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft Games\Halo CE" /f
+													reg delete "HKEY_CURRENT_USER\Software\Microsoft\Microsoft Games\Halo CE" /f
+													reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft Games\Halo CE" /f
+													reg delete "HKEY_CURRENT_USER\Software\Wow6432Node\Microsoft\Microsoft Games\Halo CE" /f
+													goto exit
+												) else (
+													if "%nonet%"=="1" (
+														call :MessageBox "dat.dll was not found." "Notice"
+														goto exit
+													) else (
+														call :YesNoBox "dat.dll was not found. Would you like to automatically download it?" "Notice"
+														if "!YesNo!"=="6" goto dat
+														goto exit
+														:dat
+														call :compat
+														grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/asset/dat.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing dat.dll"
+														goto start
+													)
 												)
-												"%CD%\base.dll" -console -use21
-												reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft Games\Halo CE" /f
-												reg delete "HKEY_CURRENT_USER\Software\Microsoft\Microsoft Games\Halo CE" /f
-												reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft Games\Halo CE" /f
-												reg delete "HKEY_CURRENT_USER\Software\Wow6432Node\Microsoft\Microsoft Games\Halo CE" /f
-												goto exit
 											) else (
 												if "%nonet%"=="1" (
 													call :MessageBox "spread.dll was not found." "Notice"
@@ -472,4 +488,6 @@ exit /b
 del "%temp%\input.vbs"
 del "%temp%\download.vbs"
 del "%temp%\version.txt"
+del "%temp%\base.txt"
+del "%temp%\dat.dll"
 exit
