@@ -7,7 +7,7 @@ HaloCEP (0.1.0) {
     Refine medal's images;
 *    Change medal's announcer;
 *    Change %temp% directory;
-    Add loading message at startup (only if loading can't be reduced);
+    Add loading message at startup (only if loading time can't be reduced);
     Incorporate server software;
     Add first run documentation;
 }
