@@ -7,5 +7,5 @@ HaloCEP (Sandstone) {
 >    Add network connectivity checking;
     Refine medal's images;
 *    Change medal's announcer;
-    Change %temp% directory;
+*    Change %temp% directory;
 }
