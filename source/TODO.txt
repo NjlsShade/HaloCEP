@@ -10,4 +10,5 @@ HaloCEP (0.1.0) {
     Add loading message at startup (only if loading time can't be reduced);
     Incorporate server software;
     Add first run documentation;
+	Add version updating when grabbing a file;
 }

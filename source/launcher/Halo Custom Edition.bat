@@ -96,7 +96,7 @@ if exist "%CD%\base.dll" (
 				call :YesNoBox "An update is needed for binkw32.dll. Would you like to download it now?" "Update"
 				if "!YesNo!"=="6" (
 					del "%CD%\binkw32.dll"
-					grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/binkw32.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing binkw32.dll"
+					grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/binkw32.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing binkw32.dll"
 					move /Y "%temp%\binkw32.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\binkw32.ns"
 				)
 			)
@@ -107,7 +107,7 @@ if exist "%CD%\base.dll" (
 					call :YesNoBox "An update is needed for config.dll. Would you like to download it now?" "Update"
 					if "!YesNo!"=="6" (
 						del "%CD%\config.dll"
-						grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/config.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing config.dll"
+						grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/config.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing config.dll"
 						move /Y "%temp%\config.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\config.ns"
 					)
 				)
@@ -118,7 +118,7 @@ if exist "%CD%\base.dll" (
 						call :YesNoBox "An update is needed for eula.dll. Would you like to download it now?" "Update"
 						if "!YesNo!"=="6" (
 							del "%CD%\eula.dll"
-							grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/eula.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing eula.dll"
+							grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/eula/eula.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing eula.dll"
 							move /Y "%temp%\eula.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\eula.ns"
 						)
 					)
@@ -129,7 +129,7 @@ if exist "%CD%\base.dll" (
 							call :YesNoBox "An update is needed for Keystone.dll. Would you like to download it now?" "Update"
 							if "!YesNo!"=="6" (
 								del "%CD%\Keystone.dll"
-								grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/Keystone.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing Keystone.dll"
+								grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/Keystone.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing Keystone.dll"
 								move /Y "%temp%\Keystone.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\Keystone.ns"
 							)
 						)
@@ -140,7 +140,7 @@ if exist "%CD%\base.dll" (
 								call :YesNoBox "An update is needed for ksimeui.dll. Would you like to download it now?" "Update"
 								if "!YesNo!"=="6" (
 									del "%CD%\ksimeui.dll"
-									grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/ksimeui.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing ksimeui.dll"
+									grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/ksimeui.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing ksimeui.dll"
 									move /Y "%temp%\ksimeui.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\ksimeui.ns"
 								)
 							)
@@ -151,7 +151,7 @@ if exist "%CD%\base.dll" (
 									call :YesNoBox "An update is needed for msvcr71.dll. Would you like to download it now?" "Update"
 									if "!YesNo!"=="6" (
 										del "%CD%\msvcr71.dll"
-										grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/msvcr71.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing msvcr71.dll"
+										grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/msvcr71.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing msvcr71.dll"
 										move /Y "%temp%\msvcr71.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\msvcr71.ns"
 									)
 								)
@@ -162,7 +162,7 @@ if exist "%CD%\base.dll" (
 										call :YesNoBox "An update is needed for ogg.dll. Would you like to download it now?" "Update"
 										if "!YesNo!"=="6" (
 											del "%CD%\ogg.dll"
-											grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/ogg.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing ogg.dll"
+											grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/ogg.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing ogg.dll"
 											move /Y "%temp%\ogg.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\ogg.ns"
 										)
 									)
@@ -173,7 +173,7 @@ if exist "%CD%\base.dll" (
 											call :YesNoBox "An update is needed for strings.dll. Would you like to download it now?" "Update"
 											if "!YesNo!"=="6" (
 												del "%CD%\strings.dll"
-												grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/strings.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing strings.dll"
+												grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/splash/strings.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing strings.dll"
 												move /Y "%temp%\strings.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\strings.ns"
 											)
 										)
@@ -184,7 +184,7 @@ if exist "%CD%\base.dll" (
 												call :YesNoBox "An update is needed for vorbis.dll. Would you like to download it now?" "Update"
 												if "!YesNo!"=="6" (
 													del "%CD%\vorbis.dll"
-													grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/vorbis.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing vorbis.dll"
+													grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/vorbis.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing vorbis.dll"
 													move /Y "%temp%\vorbis.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\vorbis.ns"
 												)
 											)
@@ -195,7 +195,7 @@ if exist "%CD%\base.dll" (
 													call :YesNoBox "An update is needed for vorbisfile.dll. Would you like to download it now?" "Update"
 													if "!YesNo!"=="6" (
 														del "%CD%\vorbisfile.dll"
-														grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/vorbisfile.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing vorbisfile.dll"
+														grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/vorbisfile.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing vorbisfile.dll"
 														move /Y "%temp%\vorbisfile.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\vorbisfile.ns"
 													)
 												)
@@ -206,7 +206,7 @@ if exist "%CD%\base.dll" (
 														call :YesNoBox "An update is needed for spread.dll. Would you like to download it now?" "Update"
 														if "!YesNo!"=="6" (
 															del "%CD%\spread.dll"
-															grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/spread.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing spread.dll"
+															grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/spread.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing spread.dll"
 															move /Y "%temp%\spread.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\spread.ns"
 														)
 													)
@@ -217,7 +217,7 @@ if exist "%CD%\base.dll" (
 															call :YesNoBox "An update is needed for dat.dll. Would you like to download it now?" "Update"
 															if "!YesNo!"=="6" (
 																del "%CD%\dat.dll"
-																grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/dat.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing dat.dll"
+																grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/asset/dat.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing dat.dll"
 																move /Y "%temp%\dat.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\dat.ns"
 															)
 														)
