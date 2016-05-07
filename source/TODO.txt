@@ -2,7 +2,7 @@ HaloCEP (0.1.0) {
     Add redist files installer (integrate?);
     Change DLL file names;
     Move all dependency files to a separate directory;
->    Add file version checking and updating;
+>    Add file version checking and updating (main file updater as well);
 *    Split base.dll (multiple files to prevent user execution?)
     Refine medal's images;
 *    Change medal's announcer;
@@ -11,4 +11,5 @@ HaloCEP (0.1.0) {
     Incorporate server software;
     Add first run documentation;
 	Add version updating when grabbing a file;
+    Do not display output in terminal;
 }
