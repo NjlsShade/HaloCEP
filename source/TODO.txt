@@ -1,11 +1,13 @@
-HaloCEP (Sandstone) {
+HaloCEP (0.1.0) {
     Add redist files installer (integrate?);
     Change DLL file names;
     Move all dependency files to a separate directory;
 >    Add file version checking and updating;
 *    Split base.dll (multiple files to prevent user execution?)
->    Add network connectivity checking;
     Refine medal's images;
 *    Change medal's announcer;
-    Change %temp% directory;
+*    Change %temp% directory;
+    Add loading message at startup (only if loading time can't be reduced);
+    Incorporate server software;
+    Add first run documentation;
 }
