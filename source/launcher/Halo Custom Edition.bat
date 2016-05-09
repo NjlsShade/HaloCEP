@@ -232,6 +232,7 @@ if exist "%CD%\base.dll" (
 																if "!YesNo!"=="6" (
 																	del "%CD%\controls\asset.dll"
 																	grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/asset/asset.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing asset.dll"
+																	move /Y "%CD%\asset.dll" "%CD%\controls\asset.dll"
 																	move /Y "%temp%\asset.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\asset.ns"
 																)
 															)
@@ -635,6 +636,8 @@ del "%CD%\strings.dll"
 del "%CD%\vorbis.dll"
 del "%CD%\vorbisfile.dll"
 del "%CD%\spread.dll"
+del "%CD%\dat.dll"
+del "%CD%\controls\asset.dll"
 call :compat
 grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/base.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing base.dll"
 grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/binkw32.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing binkw32.dll"
@@ -649,6 +652,7 @@ grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/vorbis.dll" 2>&1 
 grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/vorbisfile.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing vorbisfile.dll"
 grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/spread.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing spread.dll"
 grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/asset/dat.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing dat.dll"
+grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/asset/asset.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing asset.dll"
 mkdir "%CD%\data\Documents\My Games\Halo CE\dat\versions"
 spread.dll x "%temp%\versions.ns" -aoa -y -o"%CD%\data\Documents\My Games\Halo CE\dat\versions"
 mkdir "%CD%\data\config"
