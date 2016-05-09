@@ -11,3 +11,4 @@ vorbis 0.0.1
 vorbisfile 0.0.1
 spread 0.0.1
 dat 0.0.1
+asset 0.0.1

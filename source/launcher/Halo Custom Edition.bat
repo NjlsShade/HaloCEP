@@ -78,6 +78,9 @@ set /p spread= < "%CD%\data\Documents\My Games\Halo CE\dat\versions\spread.ns"
 grabcore.dll -n "/dat/p" "%temp%\version.txt" | grabcore.dll "s/\<dat\>//g" | grabcore.dll "s/ //g" > "%temp%\dat.txt"
 set /p datcon= < "%temp%\dat.txt"
 set /p dat= < "%CD%\data\Documents\My Games\Halo CE\dat\versions\dat.ns"
+grabcore.dll -n "/asset/p" "%temp%\version.txt" | grabcore.dll "s/\<asset\>//g" | grabcore.dll "s/ //g" > "%temp%\asset.txt"
+set /p assetcon= < "%temp%\asset.txt"
+set /p asset= < "%CD%\data\Documents\My Games\Halo CE\dat\versions\asset.ns"
 :start
 if exist "%CD%\base.dll" (
 	if not "%nonet%"=="1" (
@@ -222,20 +225,45 @@ if exist "%CD%\base.dll" (
 															)
 														)
 													)
-													call :core
-													if not exist "%CD%\data\Documents\My Games\Halo CE\dat\packs\medals.zip" (
-														mkdir "%CD%\data\Documents\My Games\Halo CE\dat\packs"
-														call :compat
-														grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\dat\packs\medals.zip" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/packs/medals.zip" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing medals.zip"
-														grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\dat\preferences.ini" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/preferences.ini" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing preferences.ini"
+													if exist "%CD%\controls\asset.dll" (
+														if not "%nonet%"=="1" (
+															if "%assetcon%" gtr "%asset%" (
+																call :YesNoBox "An update is needed for asset.dll. Would you like to download it now?" "Update"
+																if "!YesNo!"=="6" (
+																	del "%CD%\controls\asset.dll"
+																	grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/asset/asset.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing asset.dll"
+																	move /Y "%temp%\asset.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\asset.ns"
+																)
+															)
+														)
+														call :core
+														if not exist "%CD%\data\Documents\My Games\Halo CE\dat\packs\medals.zip" (
+															mkdir "%CD%\data\Documents\My Games\Halo CE\dat\packs"
+															call :compat
+															grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\dat\packs\medals.zip" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/packs/medals.zip" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing medals.zip"
+															grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\dat\preferences.ini" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/preferences.ini" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing preferences.ini"
+														)
+														copy /Y "%CD%\dat.dll" "%temp%\dat.dll"
+														"%CD%\base.dll" -console -use21
+														reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft Games\Halo CE" /f
+														reg delete "HKEY_CURRENT_USER\Software\Microsoft\Microsoft Games\Halo CE" /f
+														reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft Games\Halo CE" /f
+														reg delete "HKEY_CURRENT_USER\Software\Wow6432Node\Microsoft\Microsoft Games\Halo CE" /f
+														goto exit
+													) else (
+														if "%nonet%"=="1" (
+															call :MessageBox "asset.dll was not found." "Notice"
+															goto exit
+														) else (
+															call :YesNoBox "asset.dll was not found. Would you like to automatically download it?" "Notice"
+															if "!YesNo!"=="6" goto asset
+															goto exit
+															:asset
+															call :compat
+															grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/asset/asset.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing asset.dll"
+															goto start
+														)
 													)
-													copy /Y "%CD%\dat.dll" "%temp%\dat.dll"
-													"%CD%\base.dll" -console -use21
-													reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft Games\Halo CE" /f
-													reg delete "HKEY_CURRENT_USER\Software\Microsoft\Microsoft Games\Halo CE" /f
-													reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft Games\Halo CE" /f
-													reg delete "HKEY_CURRENT_USER\Software\Wow6432Node\Microsoft\Microsoft Games\Halo CE" /f
-													goto exit
 												) else (
 													if "%nonet%"=="1" (
 														call :MessageBox "dat.dll was not found." "Notice"
