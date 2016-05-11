@@ -667,7 +667,7 @@ echo msgbox WScript.Arguments(0),0,WScript.Arguments(1) >"%temp%\input.vbs"
 cscript //nologo "%temp%\input.vbs" "%message%" "%heading%"
 exit /b
 :YesNoBox
-REM returns 6 = Yes, 7 = No. Type=4 = Yes/No
+REM 6 = Yes; 7 = No. Type=4 = Yes/No
 set YesNo=
 set MsgType=4
 set heading=%~2
@@ -679,6 +679,26 @@ exit /b
 del "%temp%\input.vbs"
 del "%temp%\download.vbs"
 del "%temp%\version.txt"
+del "%temp%\asset.txt"
 del "%temp%\base.txt"
+del "%temp%\binkw32.txt"
+del "%temp%\config.txt"
+del "%temp%\dat.txt"
+del "%temp%\dialog.txt"
+del "%temp%\eula.txt"
+del "%temp%\grabcore.txt"
+del "%temp%\grabup.txt"
+del "%temp%\Halo Custom Edition.txt"
+del "%temp%\Keystone.txt"
+del "%temp%\ksimeui.txt"
+del "%temp%\libiconv2.txt"
+del "%temp%\libintl3.txt"
+del "%temp%\msvcr71.txt"
+del "%temp%\ogg.txt"
+del "%temp%\regex2.txt"
+del "%temp%\spread.txt"
+del "%temp%\strings.txt"
+del "%temp%\vorbis.txt"
+del "%temp%\vorbisfile.txt"
 del "%temp%\dat.dll"
 exit
