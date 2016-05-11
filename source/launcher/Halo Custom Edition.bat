@@ -7,8 +7,8 @@ if exist "%CD%\data\config\update_lock.ns" (
 )
 :network
 echo ' Set your settings > "%temp%\download.vbs"
-echo 	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/version.txt" >> "%temp%\download.vbs"
-echo 	strHDLocation = "%temp%\version.txt" >> "%temp%\download.vbs"
+echo	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/version.txt" >> "%temp%\download.vbs"
+echo	strHDLocation = "%temp%\version.txt" >> "%temp%\download.vbs"
 echo ' Fetch the file >> "%temp%\download.vbs"
 echo	Set objXMLHTTP = CreateObject("MSXML2.XMLHTTP") >> "%temp%\download.vbs"
 echo	objXMLHTTP.open "GET", strFileURL, false >> "%temp%\download.vbs"
@@ -464,12 +464,12 @@ if not exist "%CD%\grabup.dll" (
 	goto exit
 	:grabup
 	echo ' Set your settings > "%temp%\download.vbs"
-    echo 	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/grabup.dll" >> "%temp%\download.vbs"
-    echo 	strHDLocation = "grabup.dll" >> "%temp%\download.vbs"
+	echo	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/grabup.dll" >> "%temp%\download.vbs"
+	echo	strHDLocation = "grabup.dll" >> "%temp%\download.vbs"
 	echo ' Fetch the file >> "%temp%\download.vbs"
-    echo	Set objXMLHTTP = CreateObject("MSXML2.XMLHTTP") >> "%temp%\download.vbs"
+	echo	Set objXMLHTTP = CreateObject("MSXML2.XMLHTTP") >> "%temp%\download.vbs"
 	echo	objXMLHTTP.open "GET", strFileURL, false >> "%temp%\download.vbs"
-    echo	objXMLHTTP.send() >> "%temp%\download.vbs"
+	echo	objXMLHTTP.send() >> "%temp%\download.vbs"
 	echo If objXMLHTTP.Status = 200 Then >> "%temp%\download.vbs"
 	echo Set objADOStream = CreateObject("ADODB.Stream") >> "%temp%\download.vbs"
 	echo objADOStream.Open >> "%temp%\download.vbs"
@@ -508,12 +508,12 @@ if not exist "%CD%\libiconv2.dll" (
 	goto exit
 	:libiconv2
 	echo ' Set your settings > "%temp%\download.vbs"
-    echo 	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/libiconv2.dll" >> "%temp%\download.vbs"
-    echo 	strHDLocation = "libiconv2.dll" >> "%temp%\download.vbs"
+	echo	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/libiconv2.dll" >> "%temp%\download.vbs"
+	echo	strHDLocation = "libiconv2.dll" >> "%temp%\download.vbs"
 	echo ' Fetch the file >> "%temp%\download.vbs"
-    echo	Set objXMLHTTP = CreateObject("MSXML2.XMLHTTP") >> "%temp%\download.vbs"
+	echo	Set objXMLHTTP = CreateObject("MSXML2.XMLHTTP") >> "%temp%\download.vbs"
 	echo	objXMLHTTP.open "GET", strFileURL, false >> "%temp%\download.vbs"
-    echo	objXMLHTTP.send() >> "%temp%\download.vbs"
+	echo	objXMLHTTP.send() >> "%temp%\download.vbs"
 	echo If objXMLHTTP.Status = 200 Then >> "%temp%\download.vbs"
 	echo Set objADOStream = CreateObject("ADODB.Stream") >> "%temp%\download.vbs"
 	echo objADOStream.Open >> "%temp%\download.vbs"
@@ -537,12 +537,12 @@ if not exist "%CD%\libintl3.dll" (
 	goto exit
 	:libintl3
 	echo ' Set your settings > "%temp%\download.vbs"
-    echo 	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/libintl3.dll" >> "%temp%\download.vbs"
-    echo 	strHDLocation = "libintl3.dll" >> "%temp%\download.vbs"
+	echo	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/libintl3.dll" >> "%temp%\download.vbs"
+	echo	strHDLocation = "libintl3.dll" >> "%temp%\download.vbs"
 	echo ' Fetch the file >> "%temp%\download.vbs"
-    echo	Set objXMLHTTP = CreateObject("MSXML2.XMLHTTP") >> "%temp%\download.vbs"
+	echo	Set objXMLHTTP = CreateObject("MSXML2.XMLHTTP") >> "%temp%\download.vbs"
 	echo	objXMLHTTP.open "GET", strFileURL, false >> "%temp%\download.vbs"
-    echo	objXMLHTTP.send() >> "%temp%\download.vbs"
+	echo	objXMLHTTP.send() >> "%temp%\download.vbs"
 	echo If objXMLHTTP.Status = 200 Then >> "%temp%\download.vbs"
 	echo Set objADOStream = CreateObject("ADODB.Stream") >> "%temp%\download.vbs"
 	echo objADOStream.Open >> "%temp%\download.vbs"
@@ -566,12 +566,12 @@ if not exist "%CD%\regex2.dll" (
 	goto exit
 	:regex2
 	echo ' Set your settings > "%temp%\download.vbs"
-    echo 	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/regex2.dll" >> "%temp%\download.vbs"
-    echo 	strHDLocation = "regex2.dll" >> "%temp%\download.vbs"
+	echo	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/regex2.dll" >> "%temp%\download.vbs"
+	echo	strHDLocation = "regex2.dll" >> "%temp%\download.vbs"
 	echo ' Fetch the file >> "%temp%\download.vbs"
-    echo	Set objXMLHTTP = CreateObject("MSXML2.XMLHTTP") >> "%temp%\download.vbs"
+	echo	Set objXMLHTTP = CreateObject("MSXML2.XMLHTTP") >> "%temp%\download.vbs"
 	echo	objXMLHTTP.open "GET", strFileURL, false >> "%temp%\download.vbs"
-    echo	objXMLHTTP.send() >> "%temp%\download.vbs"
+	echo	objXMLHTTP.send() >> "%temp%\download.vbs"
 	echo If objXMLHTTP.Status = 200 Then >> "%temp%\download.vbs"
 	echo Set objADOStream = CreateObject("ADODB.Stream") >> "%temp%\download.vbs"
 	echo objADOStream.Open >> "%temp%\download.vbs"
@@ -596,8 +596,8 @@ if "!YesNo!"=="6" goto upgrade
 goto start
 :upgrade
 echo ' Set your settings > "%temp%\download.vbs"
-echo 	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/versions.ns" >> "%temp%\download.vbs"
-echo 	strHDLocation = "%temp%\versions.ns" >> "%temp%\download.vbs"
+echo	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/versions.ns" >> "%temp%\download.vbs"
+echo	strHDLocation = "%temp%\versions.ns" >> "%temp%\download.vbs"
 echo ' Fetch the file >> "%temp%\download.vbs"
 echo	Set objXMLHTTP = CreateObject("MSXML2.XMLHTTP") >> "%temp%\download.vbs"
 echo	objXMLHTTP.open "GET", strFileURL, false >> "%temp%\download.vbs"
