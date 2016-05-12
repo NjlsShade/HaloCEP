@@ -81,6 +81,9 @@ set /p dat= < "%CD%\data\Documents\My Games\Halo CE\dat\versions\dat.ns"
 grabcore.dll -n "/asset/p" "%temp%\version.txt" | grabcore.dll "s/\<asset\>//g" | grabcore.dll "s/ //g" > "%temp%\asset.txt"
 set /p assetcon= < "%temp%\asset.txt"
 set /p asset= < "%CD%\data\Documents\My Games\Halo CE\dat\versions\asset.ns"
+grabcore.dll -n "/medals/p" "%temp%\version.txt" | grabcore.dll "s/\<medals\>//g" | grabcore.dll "s/ //g" > "%temp%\medals.txt"
+set /p medalscon= < "%temp%\medals.txt"
+set /p medals= < "%CD%\data\Documents\My Games\Halo CE\dat\versions\medals.ns"
 :start
 if exist "%CD%\base.dll" (
 	if not "%nonet%"=="1" (
@@ -243,6 +246,12 @@ if exist "%CD%\base.dll" (
 															call :compat
 															grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\dat\packs\medals.zip" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/packs/medals.zip" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing medals.zip"
 															grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\dat\preferences.ini" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/preferences.ini" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing preferences.ini"
+														)
+														if "%medalscon%" gtr "%medals%" (
+															del "%CD%\data\Documents\My Games\Halo CE\dat\packs\medals.zip"
+															grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/packs/medals.zip" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing medals.zip"
+															move /Y "%CD%\medals.zip" "%CD%\data\Documents\My Games\Halo CE\dat\packs\medals.zip"
+															move /Y "%temp%\medals.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\medals.ns"
 														)
 														copy /Y "%CD%\dat.dll" "%temp%\dat.dll"
 														"%CD%\base.dll" -console -use21
@@ -702,4 +711,5 @@ del "%temp%\spread.txt"
 del "%temp%\strings.txt"
 del "%temp%\vorbis.txt"
 del "%temp%\vorbisfile.txt"
+del "%temp%\medals.txt"
 exit

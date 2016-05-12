@@ -13,4 +13,5 @@ HaloCEP (0.1.0) {
 >    Add version updating when grabbing a file;
     Do not display output in terminal (no stdout or stderr);
     Add window mode;
+*    Add 'medals' repair to full update;
 }
