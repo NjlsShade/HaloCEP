@@ -14,4 +14,5 @@ HaloCEP (0.1.0) {
     Do not display output in terminal (no stdout or stderr);
     Add window mode;
 *    Add 'medals' repair to full update;
+*    Change the versions.ns file to a text file, rather than a archive;
 }
