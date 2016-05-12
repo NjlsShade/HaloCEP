@@ -43,5 +43,5 @@
 +libiconv2.dll - Dependency library for grabcore.dll: Only needed for automatic updating;
 +libintl3.dll - Dependency library for grabcore.dll: Only needed for automatic updating;
 +regex2.dll - Dependency library for grabcore.dll: Only needed for automatic updating;
-+%temp%\dat.dll - Added component to the Halo CE engine: Required to start the game;
++dat.dll - Added component to the Halo CE engine: Required to start the game;
 +spread.dll - Used when updating Halo's files: Only needed for automatic updating;

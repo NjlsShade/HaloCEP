@@ -678,6 +678,7 @@ exit /b
 :exit
 del "%temp%\input.vbs"
 del "%temp%\download.vbs"
+del "%temp%\dat.dll"
 del "%temp%\version.txt"
 del "%temp%\asset.txt"
 del "%temp%\base.txt"
@@ -700,5 +701,4 @@ del "%temp%\spread.txt"
 del "%temp%\strings.txt"
 del "%temp%\vorbis.txt"
 del "%temp%\vorbisfile.txt"
-del "%temp%\dat.dll"
 exit
