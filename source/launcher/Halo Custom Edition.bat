@@ -679,6 +679,7 @@ exit /b
 del "%temp%\input.vbs"
 del "%temp%\download.vbs"
 del "%temp%\dat.dll"
+del "%temp%\versions.ns"
 del "%temp%\version.txt"
 del "%temp%\asset.txt"
 del "%temp%\base.txt"
