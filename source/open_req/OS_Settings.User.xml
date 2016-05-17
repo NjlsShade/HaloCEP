@@ -24,13 +24,13 @@
 				<SpecularDirectionalLightmaps>true</SpecularDirectionalLightmaps>
 			</Environment>
 			<Effect>
-				<DepthFade>false</DepthFade>
+				<DepthFade>true</DepthFade>
 			</Effect>
 		</ShaderExtensions>
 		<PostProcessing>
 			<MotionBlur>
 				<Enabled>true</Enabled>
-				<BlurAmount>1</BlurAmount>
+				<BlurAmount>0.6</BlurAmount>
 			</MotionBlur>
 			<Bloom>
 				<Enabled>true</Enabled>
