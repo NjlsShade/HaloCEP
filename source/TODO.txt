@@ -3,7 +3,7 @@ HaloCEP (0.1.0) {
     Change DLL file names;
     Move all dependency files to a separate directory;
 >    Add file version checking and updating (main file updater as well);
-*    Split base.dll (multiple files to prevent user execution?)
+*    Split base.dll (multiple files to prevent user execution? Too many dlls though?)
     Refine medal's images;
 *    Change medal's announcer;
 *    Change %temp% directory;
@@ -16,4 +16,5 @@ HaloCEP (0.1.0) {
 *    Add 'medals' repair to full update;
 *    Change the versions.ns file to a text file, rather than a archive;
 *    Don't copy dat.dll to the temp directory;
+    Add OS compatibility with asset.dll;
 }
