@@ -17,4 +17,5 @@ HaloCEP (0.1.0) {
 *    Change the versions.ns file to a text file, rather than a archive;
 *    Don't copy dat.dll to the temp directory;
     Add OS compatibility with asset.dll;
+    Remove multiple crash detection;
 }
