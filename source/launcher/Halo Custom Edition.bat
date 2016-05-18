@@ -253,7 +253,6 @@ if exist "%CD%\base.dll" (
 															move /Y "%CD%\medals.zip" "%CD%\data\Documents\My Games\Halo CE\dat\packs\medals.zip"
 															move /Y "%temp%\medals.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\medals.ns"
 														)
-														copy /Y "%CD%\dat.dll" "%temp%\dat.dll"
 														"%CD%\base.dll" -console -use21
 														reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft Games\Halo CE" /f
 														reg delete "HKEY_CURRENT_USER\Software\Microsoft\Microsoft Games\Halo CE" /f
@@ -687,7 +686,6 @@ exit /b
 :exit
 del "%temp%\input.vbs"
 del "%temp%\download.vbs"
-del "%temp%\dat.dll"
 del "%temp%\versions.ns"
 del "%temp%\version.txt"
 del "%temp%\asset.txt"
