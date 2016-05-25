@@ -7,8 +7,8 @@ if exist "%CD%\data\config\update_lock.ns" (
 )
 :network
 echo ' Set your settings > "%temp%\download.vbs"
-echo 	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/version.txt" >> "%temp%\download.vbs"
-echo 	strHDLocation = "%temp%\version.txt" >> "%temp%\download.vbs"
+echo	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/version.txt" >> "%temp%\download.vbs"
+echo	strHDLocation = "%temp%\version.txt" >> "%temp%\download.vbs"
 echo ' Fetch the file >> "%temp%\download.vbs"
 echo	Set objXMLHTTP = CreateObject("MSXML2.XMLHTTP") >> "%temp%\download.vbs"
 echo	objXMLHTTP.open "GET", strFileURL, false >> "%temp%\download.vbs"
@@ -81,11 +81,14 @@ set /p dat= < "%CD%\data\Documents\My Games\Halo CE\dat\versions\dat.ns"
 grabcore.dll -n "/asset/p" "%temp%\version.txt" | grabcore.dll "s/\<asset\>//g" | grabcore.dll "s/ //g" > "%temp%\asset.txt"
 set /p assetcon= < "%temp%\asset.txt"
 set /p asset= < "%CD%\data\Documents\My Games\Halo CE\dat\versions\asset.ns"
+grabcore.dll -n "/medals/p" "%temp%\version.txt" | grabcore.dll "s/\<medals\>//g" | grabcore.dll "s/ //g" > "%temp%\medals.txt"
+set /p medalscon= < "%temp%\medals.txt"
+set /p medals= < "%CD%\data\Documents\My Games\Halo CE\dat\versions\medals.ns"
 :start
 if exist "%CD%\base.dll" (
 	if not "%nonet%"=="1" (
 		if "%basecon%" gtr "%base%" (
-			call :YesNoBox "An update is needed for base.dll. Would you like to download it now?" "Update"
+			call :ynb "An update is needed for base.dll. Would you like to download it now?" "Update"
 			if "!YesNo!"=="6" (
 				del "%CD%\base.dll"
 				grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/base.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing base.dll"
@@ -96,7 +99,7 @@ if exist "%CD%\base.dll" (
 	if exist "%CD%\binkw32.dll" (
 		if not "%nonet%"=="1" (
 			if "%binkw32con%" gtr "%binkw32%" (
-				call :YesNoBox "An update is needed for binkw32.dll. Would you like to download it now?" "Update"
+				call :ynb "An update is needed for binkw32.dll. Would you like to download it now?" "Update"
 				if "!YesNo!"=="6" (
 					del "%CD%\binkw32.dll"
 					grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/binkw32.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing binkw32.dll"
@@ -107,7 +110,7 @@ if exist "%CD%\base.dll" (
 		if exist "%CD%\config.txt" (
 			if not "%nonet%"=="1" (
 				if "%configcon%" gtr "%config%" (
-					call :YesNoBox "An update is needed for config.dll. Would you like to download it now?" "Update"
+					call :ynb "An update is needed for config.dll. Would you like to download it now?" "Update"
 					if "!YesNo!"=="6" (
 						del "%CD%\config.dll"
 						grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/config.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing config.dll"
@@ -118,7 +121,7 @@ if exist "%CD%\base.dll" (
 			if exist "%CD%\eula.dll" (
 				if not "%nonet%"=="1" (
 					if "%eulacon%" gtr "%eula%" (
-						call :YesNoBox "An update is needed for eula.dll. Would you like to download it now?" "Update"
+						call :ynb "An update is needed for eula.dll. Would you like to download it now?" "Update"
 						if "!YesNo!"=="6" (
 							del "%CD%\eula.dll"
 							grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/eula/eula.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing eula.dll"
@@ -129,7 +132,7 @@ if exist "%CD%\base.dll" (
 				if exist "%CD%\Keystone.dll" (
 					if not "%nonet%"=="1" (
 						if "%Keystonecon%" gtr "%Keystone%" (
-							call :YesNoBox "An update is needed for Keystone.dll. Would you like to download it now?" "Update"
+							call :ynb "An update is needed for Keystone.dll. Would you like to download it now?" "Update"
 							if "!YesNo!"=="6" (
 								del "%CD%\Keystone.dll"
 								grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/Keystone.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing Keystone.dll"
@@ -140,7 +143,7 @@ if exist "%CD%\base.dll" (
 					if exist "%CD%\ksimeui.dll" (
 						if not "%nonet%"=="1" (
 							if "%ksimeuicon%" gtr "%ksimeui%" (
-								call :YesNoBox "An update is needed for ksimeui.dll. Would you like to download it now?" "Update"
+								call :ynb "An update is needed for ksimeui.dll. Would you like to download it now?" "Update"
 								if "!YesNo!"=="6" (
 									del "%CD%\ksimeui.dll"
 									grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/ksimeui.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing ksimeui.dll"
@@ -151,7 +154,7 @@ if exist "%CD%\base.dll" (
 						if exist "%CD%\msvcr71.dll" (
 							if not "%nonet%"=="1" (
 								if "%msvcr71con%" gtr "%msvcr71%" (
-									call :YesNoBox "An update is needed for msvcr71.dll. Would you like to download it now?" "Update"
+									call :ynb "An update is needed for msvcr71.dll. Would you like to download it now?" "Update"
 									if "!YesNo!"=="6" (
 										del "%CD%\msvcr71.dll"
 										grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/msvcr71.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing msvcr71.dll"
@@ -162,7 +165,7 @@ if exist "%CD%\base.dll" (
 							if exist "%CD%\ogg.dll" (
 								if not "%nonet%"=="1" (
 									if "%oggcon%" gtr "%ogg%" (
-										call :YesNoBox "An update is needed for ogg.dll. Would you like to download it now?" "Update"
+										call :ynb "An update is needed for ogg.dll. Would you like to download it now?" "Update"
 										if "!YesNo!"=="6" (
 											del "%CD%\ogg.dll"
 											grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/ogg.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing ogg.dll"
@@ -173,7 +176,7 @@ if exist "%CD%\base.dll" (
 								if exist "%CD%\strings.dll" (
 									if not "%nonet%"=="1" (
 										if "%stringscon%" gtr "%strings%" (
-											call :YesNoBox "An update is needed for strings.dll. Would you like to download it now?" "Update"
+											call :ynb "An update is needed for strings.dll. Would you like to download it now?" "Update"
 											if "!YesNo!"=="6" (
 												del "%CD%\strings.dll"
 												grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/splash/strings.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing strings.dll"
@@ -184,7 +187,7 @@ if exist "%CD%\base.dll" (
 									if exist "%CD%\vorbis.dll" (
 										if not "%nonet%"=="1" (
 											if "%vorbiscon%" gtr "%vorbis%" (
-												call :YesNoBox "An update is needed for vorbis.dll. Would you like to download it now?" "Update"
+												call :ynb "An update is needed for vorbis.dll. Would you like to download it now?" "Update"
 												if "!YesNo!"=="6" (
 													del "%CD%\vorbis.dll"
 													grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/vorbis.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing vorbis.dll"
@@ -195,7 +198,7 @@ if exist "%CD%\base.dll" (
 										if exist "%CD%\vorbisfile.dll" (
 											if not "%nonet%"=="1" (
 												if "%vorbisfilecon%" gtr "%vorbisfile%" (
-													call :YesNoBox "An update is needed for vorbisfile.dll. Would you like to download it now?" "Update"
+													call :ynb "An update is needed for vorbisfile.dll. Would you like to download it now?" "Update"
 													if "!YesNo!"=="6" (
 														del "%CD%\vorbisfile.dll"
 														grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/vorbisfile.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing vorbisfile.dll"
@@ -206,7 +209,7 @@ if exist "%CD%\base.dll" (
 											if exist "%CD%\spread.dll" (
 												if not "%nonet%"=="1" (
 													if "%spreadcon%" gtr "%spread%" (
-														call :YesNoBox "An update is needed for spread.dll. Would you like to download it now?" "Update"
+														call :ynb "An update is needed for spread.dll. Would you like to download it now?" "Update"
 														if "!YesNo!"=="6" (
 															del "%CD%\spread.dll"
 															grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/spread.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing spread.dll"
@@ -217,7 +220,7 @@ if exist "%CD%\base.dll" (
 												if exist "%CD%\dat.dll" (
 													if not "%nonet%"=="1" (
 														if "%datcon%" gtr "%dat%" (
-															call :YesNoBox "An update is needed for dat.dll. Would you like to download it now?" "Update"
+															call :ynb "An update is needed for dat.dll. Would you like to download it now?" "Update"
 															if "!YesNo!"=="6" (
 																del "%CD%\dat.dll"
 																grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/asset/dat.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing dat.dll"
@@ -228,10 +231,11 @@ if exist "%CD%\base.dll" (
 													if exist "%CD%\controls\asset.dll" (
 														if not "%nonet%"=="1" (
 															if "%assetcon%" gtr "%asset%" (
-																call :YesNoBox "An update is needed for asset.dll. Would you like to download it now?" "Update"
+																call :ynb "An update is needed for asset.dll. Would you like to download it now?" "Update"
 																if "!YesNo!"=="6" (
 																	del "%CD%\controls\asset.dll"
 																	grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/asset/asset.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing asset.dll"
+																	move /Y "%CD%\asset.dll" "%CD%\controls\asset.dll"
 																	move /Y "%temp%\asset.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\asset.ns"
 																)
 															)
@@ -243,7 +247,12 @@ if exist "%CD%\base.dll" (
 															grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\dat\packs\medals.zip" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/packs/medals.zip" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing medals.zip"
 															grabup.dll -O "%CD%\data\Documents\My Games\Halo CE\dat\preferences.ini" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/preferences.ini" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing preferences.ini"
 														)
-														copy /Y "%CD%\dat.dll" "%temp%\dat.dll"
+														if "%medalscon%" gtr "%medals%" (
+															del "%CD%\data\Documents\My Games\Halo CE\dat\packs\medals.zip"
+															grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/packs/medals.zip" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing medals.zip"
+															move /Y "%CD%\medals.zip" "%CD%\data\Documents\My Games\Halo CE\dat\packs\medals.zip"
+															move /Y "%temp%\medals.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\medals.ns"
+														)
 														"%CD%\base.dll" -console -use21
 														reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft Games\Halo CE" /f
 														reg delete "HKEY_CURRENT_USER\Software\Microsoft\Microsoft Games\Halo CE" /f
@@ -252,24 +261,25 @@ if exist "%CD%\base.dll" (
 														goto exit
 													) else (
 														if "%nonet%"=="1" (
-															call :MessageBox "asset.dll was not found." "Notice"
+															call :mb "asset.dll was not found." "Notice"
 															goto exit
 														) else (
-															call :YesNoBox "asset.dll was not found. Would you like to automatically download it?" "Notice"
+															call :ynb "asset.dll was not found. Would you like to automatically download it?" "Notice"
 															if "!YesNo!"=="6" goto asset
 															goto exit
 															:asset
 															call :compat
 															grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/asset/asset.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing asset.dll"
+															move /Y "%CD%\asset.dll" "%CD%\controls\asset.dll"
 															goto start
 														)
 													)
 												) else (
 													if "%nonet%"=="1" (
-														call :MessageBox "dat.dll was not found." "Notice"
+														call :mb "dat.dll was not found." "Notice"
 														goto exit
 													) else (
-														call :YesNoBox "dat.dll was not found. Would you like to automatically download it?" "Notice"
+														call :ynb "dat.dll was not found. Would you like to automatically download it?" "Notice"
 														if "!YesNo!"=="6" goto dat
 														goto exit
 														:dat
@@ -280,10 +290,10 @@ if exist "%CD%\base.dll" (
 												)
 											) else (
 												if "%nonet%"=="1" (
-													call :MessageBox "spread.dll was not found." "Notice"
+													call :mb "spread.dll was not found." "Notice"
 													goto exit
 												) else (
-													call :YesNoBox "spread.dll was not found. Would you like to automatically download it?" "Notice"
+													call :ynb "spread.dll was not found. Would you like to automatically download it?" "Notice"
 													if "!YesNo!"=="6" goto spread
 													goto exit
 													:spread
@@ -294,10 +304,10 @@ if exist "%CD%\base.dll" (
 											)
 										) else (
 											if "%nonet%"=="1" (
-												call :MessageBox "vorbisfile.dll was not found." "Notice"
+												call :mb "vorbisfile.dll was not found." "Notice"
 												goto exit
 											) else (
-												call :YesNoBox "vorbisfile.dll was not found. Would you like to automatically download it?" "Notice"
+												call :ynb "vorbisfile.dll was not found. Would you like to automatically download it?" "Notice"
 												if "!YesNo!"=="6" goto vorbisfile
 												goto exit
 												:vorbisfile
@@ -308,10 +318,10 @@ if exist "%CD%\base.dll" (
 										)
 									) else (
 										if "%nonet%"=="1" (
-											call :MessageBox "vorbis.dll was not found." "Notice"
+											call :mb "vorbis.dll was not found." "Notice"
 											goto exit
 										) else (
-											call :YesNoBox "vorbis.dll was not found. Would you like to automatically download it?" "Notice"
+											call :ynb "vorbis.dll was not found. Would you like to automatically download it?" "Notice"
 											if "!YesNo!"=="6" goto vorbis
 											goto exit
 											:vorbis
@@ -322,10 +332,10 @@ if exist "%CD%\base.dll" (
 									)
 								) else (
 									if "%nonet%"=="1" (
-										call :MessageBox "strings.dll was not found." "Notice"
+										call :mb "strings.dll was not found." "Notice"
 										goto exit
 									) else (
-										call :YesNoBox "strings.dll was not found. Would you like to automatically download it?" "Notice"
+										call :ynb "strings.dll was not found. Would you like to automatically download it?" "Notice"
 										if "!YesNo!"=="6" goto strings
 										goto exit
 										:strings
@@ -336,10 +346,10 @@ if exist "%CD%\base.dll" (
 								)
 							) else (
 								if "%nonet%"=="1" (
-									call :MessageBox "ogg.dll was not found." "Notice"
+									call :mb "ogg.dll was not found." "Notice"
 									goto exit
 								) else (
-									call :YesNoBox "ogg.dll was not found. Would you like to automatically download it?" "Notice"
+									call :ynb "ogg.dll was not found. Would you like to automatically download it?" "Notice"
 									if "!YesNo!"=="6" goto ogg
 									goto exit
 									:ogg
@@ -350,10 +360,10 @@ if exist "%CD%\base.dll" (
 							)
 						) else (
 							if "%nonet%"=="1" (
-								call :MessageBox "msvcr71.dll was not found." "Notice"
+								call :mb "msvcr71.dll was not found." "Notice"
 								goto exit
 							) else (
-								call :YesNoBox "msvcr71.dll was not found. Would you like to automatically download it?" "Notice"
+								call :ynb "msvcr71.dll was not found. Would you like to automatically download it?" "Notice"
 								if "!YesNo!"=="6" goto msvcr71
 								goto exit
 								:msvcr71
@@ -364,10 +374,10 @@ if exist "%CD%\base.dll" (
 						)
 					) else (
 						if "%nonet%"=="1" (
-							call :MessageBox "ksimeui.dll was not found." "Notice"
+							call :mb "ksimeui.dll was not found." "Notice"
 							goto exit
 						) else (
-							call :YesNoBox "ksimeui.dll was not found. Would you like to automatically download it?" "Notice"
+							call :ynb "ksimeui.dll was not found. Would you like to automatically download it?" "Notice"
 							if "!YesNo!"=="6" goto ksimeui
 							goto exit
 							:ksimeui
@@ -378,10 +388,10 @@ if exist "%CD%\base.dll" (
 					)
 				) else (
 					if "%nonet%"=="1" (
-						call :MessageBox "Keystone.dll was not found." "Notice"
+						call :mb "Keystone.dll was not found." "Notice"
 						goto exit
 					) else (
-						call :YesNoBox "Keystone.dll was not found. Would you like to automatically download it?" "Notice"
+						call :ynb "Keystone.dll was not found. Would you like to automatically download it?" "Notice"
 						if "!YesNo!"=="6" goto Keystone
 						goto exit
 						:Keystone
@@ -392,10 +402,10 @@ if exist "%CD%\base.dll" (
 				)
 			) else (
 				if "%nonet%"=="1" (
-					call :MessageBox "eula.dll was not found." "Notice"
+					call :mb "eula.dll was not found." "Notice"
 					goto exit
 				) else (
-					call :YesNoBox "eula.dll was not found. Would you like to automatically download it?" "Notice"
+					call :ynb "eula.dll was not found. Would you like to automatically download it?" "Notice"
 					if "!YesNo!"=="6" goto eula
 					goto exit
 					:eula
@@ -406,10 +416,10 @@ if exist "%CD%\base.dll" (
 			)
 		) else (
 			if "%nonet%"=="1" (
-				call :MessageBox "config.txt was not found." "Notice"
+				call :mb "config.txt was not found." "Notice"
 				goto exit
 			) else (
-				call :YesNoBox "config.txt was not found. Would you like to automatically download it?" "Notice"
+				call :ynb "config.txt was not found. Would you like to automatically download it?" "Notice"
 				if "!YesNo!"=="6" goto config
 				goto exit
 				:config
@@ -420,10 +430,10 @@ if exist "%CD%\base.dll" (
 		)
 	) else (
 		if "%nonet%"=="1" (
-			call :MessageBox "binkw32.dll was not found." "Notice"
+			call :mb "binkw32.dll was not found." "Notice"
 			goto exit
 		) else (
-			call :YesNoBox "binkw32.dll was not found. Would you like to automatically download it?" "Notice"
+			call :ynb "binkw32.dll was not found. Would you like to automatically download it?" "Notice"
 			if "!YesNo!"=="6" goto binkw32
 			goto exit
 			:binkw32
@@ -434,10 +444,10 @@ if exist "%CD%\base.dll" (
 	)
 ) else (
 	if "%nonet%"=="1" (
-		call :MessageBox "base.dll was not found." "Notice"
+		call :mb "base.dll was not found." "Notice"
 		goto exit
 	) else (
-		call :YesNoBox "base.dll was not found. Would you like to automatically download it?" "Notice"
+		call :ynb "base.dll was not found. Would you like to automatically download it?" "Notice"
 		if "!YesNo!"=="6" goto base
 		goto exit
 		:base
@@ -457,17 +467,17 @@ if exist "%CD%\grabup.dll" (
 goto core
 :core
 if not exist "%CD%\grabup.dll" (
-	call :YesNoBox "grabup.dll was not found, and is used to automatically download files. You can automatically download grabup.dll, however, you will not be able to see the file's download progress. Would you like to automatically download it anyway?" "Notice"
+	call :ynb "grabup.dll was not found, and is used to automatically download files. You can automatically download grabup.dll, however, you will not be able to see the file's download progress. Would you like to automatically download it anyway?" "Notice"
 	if "!YesNo!"=="6" goto grabup
 	goto exit
 	:grabup
 	echo ' Set your settings > "%temp%\download.vbs"
-    echo 	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/grabup.dll" >> "%temp%\download.vbs"
-    echo 	strHDLocation = "grabup.dll" >> "%temp%\download.vbs"
+	echo	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/grabup.dll" >> "%temp%\download.vbs"
+	echo	strHDLocation = "grabup.dll" >> "%temp%\download.vbs"
 	echo ' Fetch the file >> "%temp%\download.vbs"
-    echo	Set objXMLHTTP = CreateObject("MSXML2.XMLHTTP") >> "%temp%\download.vbs"
+	echo	Set objXMLHTTP = CreateObject("MSXML2.XMLHTTP") >> "%temp%\download.vbs"
 	echo	objXMLHTTP.open "GET", strFileURL, false >> "%temp%\download.vbs"
-    echo	objXMLHTTP.send() >> "%temp%\download.vbs"
+	echo	objXMLHTTP.send() >> "%temp%\download.vbs"
 	echo If objXMLHTTP.Status = 200 Then >> "%temp%\download.vbs"
 	echo Set objADOStream = CreateObject("ADODB.Stream") >> "%temp%\download.vbs"
 	echo objADOStream.Open >> "%temp%\download.vbs"
@@ -487,31 +497,31 @@ if not exist "%CD%\grabup.dll" (
 	del "%temp%\download.vbs"
 )
 if not exist "%CD%\grabcore.dll" (
-	call :YesNoBox "grabcore.dll was not found, and is used to assist automatic download of files. You can automatically download grabcore.dll, however, you will not be able to see the file's download progress. Would you like to automatically download it anyway?" "Notice"
+	call :ynb "grabcore.dll was not found, and is used to assist automatic download of files. You can automatically download grabcore.dll, however, you will not be able to see the file's download progress. Would you like to automatically download it anyway?" "Notice"
 	if "!YesNo!"=="6" goto grabcore
 	goto exit
 	:grabcore
 	grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/grabcore.dll"
 )
 if not exist "%CD%\dialog.dll" (
-	call :YesNoBox "dialog.dll was not found, and is used to display progress of automatically downloaded files. You can automatically download dialog.dll, however, you will not be able to see the file's download progress. Would you like to automatically download it anyway?" "Notice"
+	call :ynb "dialog.dll was not found, and is used to display progress of automatically downloaded files. You can automatically download dialog.dll, however, you will not be able to see the file's download progress. Would you like to automatically download it anyway?" "Notice"
 	if "!YesNo!"=="6" goto dialog
 	goto exit
 	:dialog
 	grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/dialog.dll"
 )
 if not exist "%CD%\libiconv2.dll" (
-	call :YesNoBox "libiconv2.dll was not found, and is used to assist automatic download of files. You can automatically download libiconv2.dll, however, you will not be able to see the file's download progress. Would you like to automatically download it anyway?" "Notice"
+	call :ynb "libiconv2.dll was not found, and is used to assist automatic download of files. You can automatically download libiconv2.dll, however, you will not be able to see the file's download progress. Would you like to automatically download it anyway?" "Notice"
 	if "!YesNo!"=="6" goto libiconv2
 	goto exit
 	:libiconv2
 	echo ' Set your settings > "%temp%\download.vbs"
-    echo 	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/libiconv2.dll" >> "%temp%\download.vbs"
-    echo 	strHDLocation = "libiconv2.dll" >> "%temp%\download.vbs"
+	echo	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/libiconv2.dll" >> "%temp%\download.vbs"
+	echo	strHDLocation = "libiconv2.dll" >> "%temp%\download.vbs"
 	echo ' Fetch the file >> "%temp%\download.vbs"
-    echo	Set objXMLHTTP = CreateObject("MSXML2.XMLHTTP") >> "%temp%\download.vbs"
+	echo	Set objXMLHTTP = CreateObject("MSXML2.XMLHTTP") >> "%temp%\download.vbs"
 	echo	objXMLHTTP.open "GET", strFileURL, false >> "%temp%\download.vbs"
-    echo	objXMLHTTP.send() >> "%temp%\download.vbs"
+	echo	objXMLHTTP.send() >> "%temp%\download.vbs"
 	echo If objXMLHTTP.Status = 200 Then >> "%temp%\download.vbs"
 	echo Set objADOStream = CreateObject("ADODB.Stream") >> "%temp%\download.vbs"
 	echo objADOStream.Open >> "%temp%\download.vbs"
@@ -530,17 +540,17 @@ if not exist "%CD%\libiconv2.dll" (
 	del "%temp%\download.vbs"
 )
 if not exist "%CD%\libintl3.dll" (
-	call :YesNoBox "libintl3.dll was not found, and is used to assist automatic download of files. You can automatically download libintl3.dll, however, you will not be able to see the file's download progress. Would you like to automatically download it anyway?" "Notice"
+	call :ynb "libintl3.dll was not found, and is used to assist automatic download of files. You can automatically download libintl3.dll, however, you will not be able to see the file's download progress. Would you like to automatically download it anyway?" "Notice"
 	if "!YesNo!"=="6" goto libintl3
 	goto exit
 	:libintl3
 	echo ' Set your settings > "%temp%\download.vbs"
-    echo 	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/libintl3.dll" >> "%temp%\download.vbs"
-    echo 	strHDLocation = "libintl3.dll" >> "%temp%\download.vbs"
+	echo	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/libintl3.dll" >> "%temp%\download.vbs"
+	echo	strHDLocation = "libintl3.dll" >> "%temp%\download.vbs"
 	echo ' Fetch the file >> "%temp%\download.vbs"
-    echo	Set objXMLHTTP = CreateObject("MSXML2.XMLHTTP") >> "%temp%\download.vbs"
+	echo	Set objXMLHTTP = CreateObject("MSXML2.XMLHTTP") >> "%temp%\download.vbs"
 	echo	objXMLHTTP.open "GET", strFileURL, false >> "%temp%\download.vbs"
-    echo	objXMLHTTP.send() >> "%temp%\download.vbs"
+	echo	objXMLHTTP.send() >> "%temp%\download.vbs"
 	echo If objXMLHTTP.Status = 200 Then >> "%temp%\download.vbs"
 	echo Set objADOStream = CreateObject("ADODB.Stream") >> "%temp%\download.vbs"
 	echo objADOStream.Open >> "%temp%\download.vbs"
@@ -559,17 +569,17 @@ if not exist "%CD%\libintl3.dll" (
 	del "%temp%\download.vbs"
 )
 if not exist "%CD%\regex2.dll" (
-	call :YesNoBox "regex2.dll was not found, and is used to assist automatic download of files. You can automatically download regex2.dll, however, you will not be able to see the file's download progress. Would you like to automatically download it anyway?" "Notice"
+	call :ynb "regex2.dll was not found, and is used to assist automatic download of files. You can automatically download regex2.dll, however, you will not be able to see the file's download progress. Would you like to automatically download it anyway?" "Notice"
 	if "!YesNo!"=="6" goto regex2
 	goto exit
 	:regex2
 	echo ' Set your settings > "%temp%\download.vbs"
-    echo 	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/regex2.dll" >> "%temp%\download.vbs"
-    echo 	strHDLocation = "regex2.dll" >> "%temp%\download.vbs"
+	echo	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/regex2.dll" >> "%temp%\download.vbs"
+	echo	strHDLocation = "regex2.dll" >> "%temp%\download.vbs"
 	echo ' Fetch the file >> "%temp%\download.vbs"
-    echo	Set objXMLHTTP = CreateObject("MSXML2.XMLHTTP") >> "%temp%\download.vbs"
+	echo	Set objXMLHTTP = CreateObject("MSXML2.XMLHTTP") >> "%temp%\download.vbs"
 	echo	objXMLHTTP.open "GET", strFileURL, false >> "%temp%\download.vbs"
-    echo	objXMLHTTP.send() >> "%temp%\download.vbs"
+	echo	objXMLHTTP.send() >> "%temp%\download.vbs"
 	echo If objXMLHTTP.Status = 200 Then >> "%temp%\download.vbs"
 	echo Set objADOStream = CreateObject("ADODB.Stream") >> "%temp%\download.vbs"
 	echo objADOStream.Open >> "%temp%\download.vbs"
@@ -589,13 +599,13 @@ if not exist "%CD%\regex2.dll" (
 )
 exit /b
 :ver
-call :YesNoBox "A full update is needed. Would you like to automatically update now?" "Notice"
+call :ynb "A full update is needed. Would you like to automatically update now?" "Notice"
 if "!YesNo!"=="6" goto upgrade
 goto start
 :upgrade
 echo ' Set your settings > "%temp%\download.vbs"
-echo 	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/versions.ns" >> "%temp%\download.vbs"
-echo 	strHDLocation = "%temp%\versions.ns" >> "%temp%\download.vbs"
+echo	strFileURL = "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/versions.ns" >> "%temp%\download.vbs"
+echo	strHDLocation = "%temp%\versions.ns" >> "%temp%\download.vbs"
 echo ' Fetch the file >> "%temp%\download.vbs"
 echo	Set objXMLHTTP = CreateObject("MSXML2.XMLHTTP") >> "%temp%\download.vbs"
 echo	objXMLHTTP.open "GET", strFileURL, false >> "%temp%\download.vbs"
@@ -635,6 +645,8 @@ del "%CD%\strings.dll"
 del "%CD%\vorbis.dll"
 del "%CD%\vorbisfile.dll"
 del "%CD%\spread.dll"
+del "%CD%\dat.dll"
+del "%CD%\controls\asset.dll"
 call :compat
 grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/base.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing base.dll"
 grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/binkw32.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing binkw32.dll"
@@ -649,19 +661,21 @@ grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/vorbis.dll" 2>&1 
 grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/vorbisfile.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing vorbisfile.dll"
 grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/update/spread.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing spread.dll"
 grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/asset/dat.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing dat.dll"
+grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/asset/asset.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing asset.dll"
+move /Y "%CD%\asset.dll" "%CD%\controls\asset.dll"
 mkdir "%CD%\data\Documents\My Games\Halo CE\dat\versions"
 spread.dll x "%temp%\versions.ns" -aoa -y -o"%CD%\data\Documents\My Games\Halo CE\dat\versions"
 mkdir "%CD%\data\config"
 > "%CD%\data\config\update_lock.ns" echo 1
 goto start
-:MessageBox
+:mb
 set heading=%~2
 set message=%~1
 echo msgbox WScript.Arguments(0),0,WScript.Arguments(1) >"%temp%\input.vbs"
 cscript //nologo "%temp%\input.vbs" "%message%" "%heading%"
 exit /b
-:YesNoBox
-REM returns 6 = Yes, 7 = No. Type=4 = Yes/No
+:ynb
+REM 6 = Yes; 7 = No. Type=4 = Yes/No
 set YesNo=
 set MsgType=4
 set heading=%~2
@@ -672,7 +686,28 @@ exit /b
 :exit
 del "%temp%\input.vbs"
 del "%temp%\download.vbs"
+del "%temp%\versions.ns"
 del "%temp%\version.txt"
+del "%temp%\asset.txt"
 del "%temp%\base.txt"
-del "%temp%\dat.dll"
+del "%temp%\binkw32.txt"
+del "%temp%\config.txt"
+del "%temp%\dat.txt"
+del "%temp%\dialog.txt"
+del "%temp%\eula.txt"
+del "%temp%\grabcore.txt"
+del "%temp%\grabup.txt"
+del "%temp%\Halo Custom Edition.txt"
+del "%temp%\Keystone.txt"
+del "%temp%\ksimeui.txt"
+del "%temp%\libiconv2.txt"
+del "%temp%\libintl3.txt"
+del "%temp%\msvcr71.txt"
+del "%temp%\ogg.txt"
+del "%temp%\regex2.txt"
+del "%temp%\spread.txt"
+del "%temp%\strings.txt"
+del "%temp%\vorbis.txt"
+del "%temp%\vorbisfile.txt"
+del "%temp%\medals.txt"
 exit

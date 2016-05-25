@@ -1,4 +1,5 @@
 HaloCEP (Sandstone) {
     Medals do not match changed resolution until the game is restarted;
     Game crashes when the resolution is changed during game-play;
+?    Game encounters an exception error when computer is forcefully shutdown;
 }
