@@ -16,4 +16,6 @@ HaloCEP (0.1.0) {
 *    Change the versions.ns file to a text file, rather than a archive;
     Add OS compatibility with asset.dll;
 ?    Remove multiple crash detection;
+	Add "Full Update" query cacheting (So it doesn't ask you to download every downloader dependency individually);
+	Add Windows XP support for network checking;
 }
