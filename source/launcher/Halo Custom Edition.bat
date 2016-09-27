@@ -85,13 +85,13 @@ grabcore.dll -n "/medals/p" "%temp%\version.txt" | grabcore.dll "s/\<medals\>//g
 set /p medalscon= < "%temp%\medals.txt"
 set /p medals= < "%CD%\data\Documents\My Games\Halo CE\dat\versions\medals.ns"
 :start
-if exist "%CD%\base.dll" (
+if exist "%CD%\resources\base.dll" (
 	if not "%nonet%"=="1" (
 		if "%basecon%" gtr "%base%" (
 			call :ynb "An update is needed for base.dll. Would you like to download it now?" "Update"
 			if "!YesNo!"=="6" (
-				del "%CD%\base.dll"
-				grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/base.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing base.dll"
+				grabup.dll -O "%CD%\resources\base.dll" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/base.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing base.dll"
+				del "%CD%\resources\base.dll"
 				move /Y "%temp%\base.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\base.ns"
 			)
 		)
@@ -253,7 +253,7 @@ if exist "%CD%\base.dll" (
 															move /Y "%CD%\medals.zip" "%CD%\data\Documents\My Games\Halo CE\dat\packs\medals.zip"
 															move /Y "%temp%\medals.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\medals.ns"
 														)
-														"%CD%\base.dll" -console -use21
+														"%CD%\resources\base.dll" -console -use21
 														reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft Games\Halo CE" /f
 														reg delete "HKEY_CURRENT_USER\Software\Microsoft\Microsoft Games\Halo CE" /f
 														reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft Games\Halo CE" /f
@@ -452,7 +452,8 @@ if exist "%CD%\base.dll" (
 		goto exit
 		:base
 		call :compat
-		grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/base.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing base.dll"
+		grabup.dll -O "%CD%\resources\base.dll" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/base.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing base.dll"
+		move "%CD%\base.dll" "%CD%\resources\base.dll"
 		goto start
 	)
 )
