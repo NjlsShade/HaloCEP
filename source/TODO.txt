@@ -1,19 +1,23 @@
 HaloCEP (0.1.0) {
-    Add redist files installer (integrate?);
+    Add redist files installer (Integrate?);
     Change DLL file names;
->    Move all dependency files to a separate directory;
->    Add file version checking and updating (main file updater as well);
-*    Split base.dll (multiple files to prevent user execution? Too many dlls though?)
+N>    Move all dependency files to a separate directory;
+N>    Add file version checking and updating (Main file updater as well);
+*    Split base.dll (Multiple files to prevent user execution? Too many dlls though?)
     Refine medal's images;
 *    Change medal's announcer;
 *    Change %temp% directory;
->    Add loading message at startup;
+    Add loading message at startup;
     Incorporate server software;
->    Add version updating when grabbing a file;
-    Do not display output in terminal (no stdout or stderr);
-    Add window mode;
+    Add version updating when grabbing a file;
+    Do not display output in terminal (No stdout or stderr to speedup processing);
+*    Add window mode;
 *    Add 'medals' repair to full update;
 *    Change the versions.ns file to a text file, rather than a archive;
-    Add OS compatibility with asset.dll;
+*    Add OS compatibility with asset.dll;
 ?    Remove multiple crash detection;
+N>    Add "Full Update" query cacheting (So it doesn't ask you to download every downloader dependency individually);
+*    Add Windows XP support for network checking;
+    Add internat flake toleration;
+    Add Windows 10 support (asset.dll compateability, Maybe Windows 10 Anaversory Edition fixes this?);
 }

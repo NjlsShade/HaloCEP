@@ -1,4 +1,4 @@
-base 0.0.1
+base 0.0.2
 binkw32 0.0.1
 config 0.0.1
 eula 0.0.1
