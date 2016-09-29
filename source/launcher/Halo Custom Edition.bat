@@ -39,6 +39,7 @@ if exist "%temp%\version.txt" (
 set nonet=1
 goto start
 :var
+call :compat
 grabcore.dll -n "/base/p" "%temp%\version.txt" | grabcore.dll "s/\<base\>//g" | grabcore.dll "s/ //g" > "%temp%\base.txt"
 set /p basecon= < "%temp%\base.txt"
 set /p base= < "%CD%\data\Documents\My Games\Halo CE\dat\versions\base.ns"
@@ -90,19 +91,25 @@ if exist "%CD%\resources\base.dll" (
 		if "%basecon%" gtr "%base%" (
 			call :ynb "An update is needed for base.dll. Would you like to download it now?" "Update"
 			if "!YesNo!"=="6" (
-				grabup.dll -O "%CD%\resources\base.dll" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/base.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing base.dll"
-				del "%CD%\resources\base.dll"
+				grabup.dll -O "%CD%\resources\base.dll.up" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/base.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing base.dll"
+				if exist "%CD%\resources\base.dll.up" (
+					del "%CD%\resources\base.dll"
+					rename "%CD%\resources\base.dll.up" "%CD%\resources\base.dll"
+				)
 				move /Y "%temp%\base.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\base.ns"
 			)
 		)
 	)
-	if exist "%CD%\binkw32.dll" (
+	if exist "%CD%\resources\binkw32.dll" (
 		if not "%nonet%"=="1" (
 			if "%binkw32con%" gtr "%binkw32%" (
 				call :ynb "An update is needed for binkw32.dll. Would you like to download it now?" "Update"
 				if "!YesNo!"=="6" (
-					del "%CD%\binkw32.dll"
-					grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/binkw32.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing binkw32.dll"
+					grabup.dll -O "%CD%\resources\binkw32.dll.up" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/binkw32.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing binkw32.dll"
+					if exist "%CD%\resources\binkw32.dll.up" (
+						del "%CD%\resources\binkw32.dll"
+						rename "%CD%\resources\binkw32.dll.up" "%CD%\resources\binkw32.dll"
+					)
 					move /Y "%temp%\binkw32.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\binkw32.ns"
 				)
 			)
@@ -112,19 +119,25 @@ if exist "%CD%\resources\base.dll" (
 				if "%configcon%" gtr "%config%" (
 					call :ynb "An update is needed for config.dll. Would you like to download it now?" "Update"
 					if "!YesNo!"=="6" (
-						del "%CD%\config.dll"
-						grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/config.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing config.dll"
+						grabup.dll -O "%CD%\config.txt.up" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/config.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing config.dll"
+						if exist "%CD%\config.txt.up" (
+							del "%CD%\config.dll"
+							rename "%CD%\config.txt.up" "%CD%\config.txt"
+						)
 						move /Y "%temp%\config.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\config.ns"
 					)
 				)
 			)
-			if exist "%CD%\eula.dll" (
+			if exist "%CD%\resources\eula.dll" (
 				if not "%nonet%"=="1" (
 					if "%eulacon%" gtr "%eula%" (
 						call :ynb "An update is needed for eula.dll. Would you like to download it now?" "Update"
 						if "!YesNo!"=="6" (
-							del "%CD%\eula.dll"
-							grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/eula/eula.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing eula.dll"
+							grabup.dll -O "%CD%\resources\eula.dll.up" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/eula/eula.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing eula.dll"
+							if exist "%CD%\resources\eula.dll.up" (
+								del "%CD%\resources\eula.dll"
+								rename "%CD%\resources\eula.dll.up" "%CD%\resources\eula.dll"
+							)
 							move /Y "%temp%\eula.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\eula.ns"
 						)
 					)
@@ -410,7 +423,7 @@ if exist "%CD%\resources\base.dll" (
 					goto exit
 					:eula
 					call :compat
-					grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/eula/eula.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing eula.dll"
+					grabup.dll -O "%CD%\resources\eula.dll" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/eula/eula.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing eula.dll"
 					goto start
 				)
 			)
@@ -424,7 +437,7 @@ if exist "%CD%\resources\base.dll" (
 				goto exit
 				:config
 				call :compat
-				grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/config.txt" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing config.txt"
+				grabup.dll -O "%CD%\config.txt" "https://bitbucket.org/NjlsShade/halocep/raw/master/config.txt" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing config.txt"
 				goto start
 			)
 		)
@@ -438,7 +451,7 @@ if exist "%CD%\resources\base.dll" (
 			goto exit
 			:binkw32
 			call :compat
-			grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/binkw32.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing binkw32.dll"
+			grabup.dll -O "%CD%\resources\binkw32.dll" "https://bitbucket.org/NjlsShade/halocep/raw/master/binkw32.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing binkw32.dll"
 			goto start
 		)
 	)
@@ -453,7 +466,6 @@ if exist "%CD%\resources\base.dll" (
 		:base
 		call :compat
 		grabup.dll -O "%CD%\resources\base.dll" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/base.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing base.dll"
-		move "%CD%\base.dll" "%CD%\resources\base.dll"
 		goto start
 	)
 )
@@ -461,7 +473,13 @@ if exist "%CD%\resources\base.dll" (
 if exist "%CD%\grabup.dll" (
 	if exist "%CD%\grabcore.dll" (
 		if exist "%CD%\dialog.dll" (
-			exit /b
+			if exist "%CD%\libiconv2.dll" (
+				if exist "%CD%\libintl3.dll" (
+					if exist "%CD%\regex2.dll" (
+						exit /b
+					)
+				)
+			)
 		)
 	)
 )
