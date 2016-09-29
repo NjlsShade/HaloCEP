@@ -2,5 +2,5 @@ HaloCEP (0.1.0) {
     Medals do not match changed resolution until the game is restarted;
     Game crashes when the resolution is changed during game-play;
 ?    Game encounters a perminite exception error when computer is forcefully shutdown;
-?    Game crasshes on start in Windows 10;
+?    Game crashes on start in Windows 10;
 }
