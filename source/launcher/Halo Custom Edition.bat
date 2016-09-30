@@ -1,5 +1,5 @@
 setlocal enabledelayedexpansion
-set USERPROFILE=%CD%\data\
+set USERPROFILE=%CD%\data
 if exist "%CD%\data\config\update_lock.ns" (
 	set /p lock= < "%CD%\data\config\update_lock.ns"
 ) else (
