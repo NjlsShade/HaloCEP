@@ -52,9 +52,9 @@ set /p config= < "%CD%\data\Documents\My Games\Halo CE\dat\versions\config.ns"
 grabcore.dll -n "/eula/p" "%temp%\version.txt" | grabcore.dll "s/\<eula\>//g" | grabcore.dll "s/ //g" > "%temp%\eula.txt"
 set /p eulacon= < "%temp%\eula.txt"
 set /p eula= < "%CD%\data\Documents\My Games\Halo CE\dat\versions\eula.ns"
-grabcore.dll -n "/Keystone/p" "%temp%\version.txt" | grabcore.dll "s/\<Keystone\>//g" | grabcore.dll "s/ //g" > "%temp%\Keystone.txt"
-set /p Keystonecon= < "%temp%\Keystone.txt"
-set /p Keystone= < "%CD%\data\Documents\My Games\Halo CE\dat\versions\Keystone.ns"
+grabcore.dll -n "/keystone/p" "%temp%\version.txt" | grabcore.dll "s/\<keystone\>//g" | grabcore.dll "s/ //g" > "%temp%\keystone.txt"
+set /p keystonecon= < "%temp%\keystone.txt"
+set /p keystone= < "%CD%\data\Documents\My Games\Halo CE\dat\versions\keystone.ns"
 grabcore.dll -n "/ksimeui/p" "%temp%\version.txt" | grabcore.dll "s/\<ksimeui\>//g" | grabcore.dll "s/ //g" > "%temp%\ksimeui.txt"
 set /p ksimeuicon= < "%temp%\ksimeui.txt"
 set /p ksimeui= < "%CD%\data\Documents\My Games\Halo CE\dat\versions\ksimeui.ns"
@@ -142,14 +142,14 @@ if exist "%CD%\resources\base.dll" (
 						)
 					)
 				)
-				if exist "%CD%\Keystone.dll" (
+				if exist "%CD%\keystone.dll" (
 					if not "%nonet%"=="1" (
-						if "%Keystonecon%" gtr "%Keystone%" (
-							call :ynb "An update is needed for Keystone.dll. Would you like to download it now?" "Update"
+						if "%keystonecon%" gtr "%keystone%" (
+							call :ynb "An update is needed for keystone.dll. Would you like to download it now?" "Update"
 							if "!YesNo!"=="6" (
-								del "%CD%\Keystone.dll"
-								grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/Keystone.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing Keystone.dll"
-								move /Y "%temp%\Keystone.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\Keystone.ns"
+								del "%CD%\keystone.dll"
+								grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/keystone.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing keystone.dll"
+								move /Y "%temp%\keystone.txt" "%CD%\data\Documents\My Games\Halo CE\dat\versions\keystone.ns"
 							)
 						)
 					)
@@ -401,15 +401,15 @@ if exist "%CD%\resources\base.dll" (
 					)
 				) else (
 					if "%nonet%"=="1" (
-						call :mb "Keystone.dll was not found." "Notice"
+						call :mb "keystone.dll was not found." "Notice"
 						goto exit
 					) else (
-						call :ynb "Keystone.dll was not found. Would you like to automatically download it?" "Notice"
-						if "!YesNo!"=="6" goto Keystone
+						call :ynb "keystone.dll was not found. Would you like to automatically download it?" "Notice"
+						if "!YesNo!"=="6" goto keystone
 						goto exit
-						:Keystone
+						:keystone
 						call :compat
-						grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/Keystone.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing Keystone.dll"
+						grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/keystone.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing keystone.dll"
 						goto start
 					)
 				)
@@ -653,7 +653,7 @@ del "%CD%\dialog.dll"
 del "%CD%\eula.dll"
 del "%CD%\grabcore.dll"
 del "%CD%\grabup.dll"
-del "%CD%\Keystone.dll"
+del "%CD%\keystone.dll"
 del "%CD%\ksimeui.dll"
 del "%CD%\libiconv2.dll"
 del "%CD%\libintl3.dll"
@@ -671,7 +671,7 @@ grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/launcher/b
 grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/binkw32.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing binkw32.dll"
 grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/config.txt" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing config.txt"
 grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/eula/eula.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing eula.dll"
-grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/Keystone.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing Keystone.dll"
+grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/keystone.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing keystone.dll"
 grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/ksimeui.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing ksimeui.dll"
 grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/msvcr71.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing msvcr71.dll"
 grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/ogg.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing ogg.dll"
@@ -717,7 +717,7 @@ del "%temp%\eula.txt"
 del "%temp%\grabcore.txt"
 del "%temp%\grabup.txt"
 del "%temp%\Halo Custom Edition.txt"
-del "%temp%\Keystone.txt"
+del "%temp%\keystone.txt"
 del "%temp%\ksimeui.txt"
 del "%temp%\libiconv2.txt"
 del "%temp%\libintl3.txt"
