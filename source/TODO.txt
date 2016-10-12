@@ -18,7 +18,8 @@ N>    Add file version checking and updating (Main file updater as well);
 N>    Add "Full Update" query caching (So it doesn't ask you to download every grabup dependency individually >.<);
 *    Add Windows XP support for network checking;
     Add internet flake toleration;
-    Add Windows 10 support (asset.dll compatibility, Maybe Windows 10 Anniversary Edition fixes this?);
+    Fix Gathering exception data!!! (custom_chat and optic_pack);
 	Find out why medals.zip downloads after first game launch.
 	Add ability to use custom product key (Make them type it twice!);
+*	Remove console for final release;
 }
