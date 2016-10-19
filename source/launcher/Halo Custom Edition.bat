@@ -1,6 +1,12 @@
 setlocal enabledelayedexpansion
 set USERPROFILE=%CD%\data
 set docroot=Documents
+:init
+set osv=1
+if not exist "%CD%\resources\osver.dll" (
+	set osv=0
+	goto osno
+)
 "%CD%\resources\osver.dll" > "%temp%\os.txt"
 set /p OSVER=< "%temp%\os.txt"
 if "%OSVER%"=="Windows XP" (
@@ -249,25 +255,55 @@ if exist "%CD%\resources\base.dll" (
 															)
 														)
 													)
-													call :core
-													if not exist "%CD%\data\%docroot%\My Games\Halo CE\dat\packs\medals.zip" (
-														mkdir "%CD%\data\%docroot%\My Games\Halo CE\dat\packs"
-														call :compat
-														grabup.dll -O "%CD%\data\%docroot%\My Games\Halo CE\dat\packs\medals.zip" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/packs/medals.zip" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing medals.zip"
-														grabup.dll -O "%CD%\data\%docroot%\My Games\Halo CE\dat\preferences.ini" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/preferences.ini" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing preferences.ini"
+													:osno
+													if exist "%CD%\resources\osver.dll" (
+														if not "%nonet%"=="1" (
+															if "%osvercon%" gtr "%osver%" (
+																call :ynb "An update is needed for osver.dll. Would you like to download it now?" "Update"
+																if "!YesNo!"=="6" (
+																	del "%CD%\resources\osver.dll"
+																	grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/resources/osver.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing osver.dll"
+																	move /Y "%CD%\osver.dll" "%CD%\resources\osver.dll"
+																	move /Y "%temp%\osver.txt" "%CD%\data\%docroot%\My Games\Halo CE\dat\versions\osver.ns"
+																	
+																)
+															)
+														)
+														call :core
+														if not exist "%CD%\data\%docroot%\My Games\Halo CE\dat\packs\medals.zip" (
+															mkdir "%CD%\data\%docroot%\My Games\Halo CE\dat\packs"
+															call :compat
+															grabup.dll -O "%CD%\data\%docroot%\My Games\Halo CE\dat\packs\medals.zip" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/packs/medals.zip" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing medals.zip"
+															grabup.dll -O "%CD%\data\%docroot%\My Games\Halo CE\dat\preferences.ini" "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/preferences.ini" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing preferences.ini"
+														)
+														if "%medalscon%" gtr "%medals%" (
+															del "%CD%\data\%docroot%\My Games\Halo CE\dat\packs\medals.zip"
+															grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/packs/medals.zip" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing medals.zip"
+															move /Y "%CD%\medals.zip" "%CD%\data\%docroot%\My Games\Halo CE\dat\packs\medals.zip"
+															move /Y "%temp%\medals.txt" "%CD%\data\%docroot%\My Games\Halo CE\dat\versions\medals.ns"
+														)
+														"%CD%\resources\base.dll" -console -use21
+														reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft Games\Halo CE" /f
+														reg delete "HKEY_CURRENT_USER\Software\Microsoft\Microsoft Games\Halo CE" /f
+														reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft Games\Halo CE" /f
+														reg delete "HKEY_CURRENT_USER\Software\Wow6432Node\Microsoft\Microsoft Games\Halo CE" /f
+														goto exit
+													) else (
+														if "%nonet%"=="1" (
+															call :mb "osver.dll was not found." "Notice"
+															goto exit
+														) else (
+															call :ynb "osver.dll was not found. Would you like to automatically download it?" "Notice"
+															if "!YesNo!"=="6" goto osver
+															goto exit
+															:osver
+															call :compat
+															grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/resources/osver.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing osver.dll"
+															move /Y "%CD%\osver.dll" "%CD%\controls\osver.dll"
+															if "%osv%"=="0" goto init
+															goto start
+														)
 													)
-													if "%medalscon%" gtr "%medals%" (
-														del "%CD%\data\%docroot%\My Games\Halo CE\dat\packs\medals.zip"
-														grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/dat/packs/medals.zip" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing medals.zip"
-														move /Y "%CD%\medals.zip" "%CD%\data\%docroot%\My Games\Halo CE\dat\packs\medals.zip"
-														move /Y "%temp%\medals.txt" "%CD%\data\%docroot%\My Games\Halo CE\dat\versions\medals.ns"
-													)
-													"%CD%\resources\base.dll" -console -use21
-													reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft Games\Halo CE" /f
-													reg delete "HKEY_CURRENT_USER\Software\Microsoft\Microsoft Games\Halo CE" /f
-													reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft Games\Halo CE" /f
-													reg delete "HKEY_CURRENT_USER\Software\Wow6432Node\Microsoft\Microsoft Games\Halo CE" /f
-													goto exit
 												) else (
 													if "%nonet%"=="1" (
 														call :mb "asset.dll was not found." "Notice"
@@ -712,4 +748,5 @@ del "%temp%\strings.txt"
 del "%temp%\vorbis.txt"
 del "%temp%\vorbisfile.txt"
 del "%temp%\medals.txt"
+del "%temp%\os.txt"
 exit
