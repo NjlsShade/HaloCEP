@@ -262,7 +262,7 @@ if exist "%CD%\resources\base.dll" (
 																call :ynb "An update is needed for osver.dll. Would you like to download it now?" "Update"
 																if "!YesNo!"=="6" (
 																	del "%CD%\resources\osver.dll"
-																	grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/resources/osver.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing osver.dll"
+																	grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/asset/osver.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing osver.dll"
 																	move /Y "%CD%\osver.dll" "%CD%\resources\osver.dll"
 																	move /Y "%temp%\osver.txt" "%CD%\data\%docroot%\My Games\Halo CE\dat\versions\osver.ns"
 																	
@@ -298,7 +298,7 @@ if exist "%CD%\resources\base.dll" (
 															goto exit
 															:osver
 															call :compat
-															grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/resources/osver.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing osver.dll"
+															grabup.dll "https://bitbucket.org/NjlsShade/halocep/raw/master/source/asset/osver.dll" 2>&1 | grabcore.dll -u "s/.*\ \([0-9]\+%%\)\ \+\([0-9.]\+\ [KMB\/s]\+\)$/\1\n# Downloading \2/" | dialog.dll --no-cancel --progress --auto-close --title="Grabbing osver.dll"
 															move /Y "%CD%\osver.dll" "%CD%\controls\osver.dll"
 															if "%osv%"=="0" goto init
 															goto start
