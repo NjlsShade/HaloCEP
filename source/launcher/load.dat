@@ -1,0 +1,46 @@
+with HTABox("white", 100, 300, 400, 500)
+  .document.title = "Notice"
+  .msg.innerHTML = "<font color=#000><b>Starting...</b></font>"
+  Timeout = 0
+  do until .done.value or (n < TimeOut): wsh.sleep 50 : n=n+50 : loop
+  .done.value = true
+  .close
+end with
+
+Function HTABox(sBgColor, h, w, l, t)
+Dim IE, HTA
+
+  randomize : nRnd = Int(1000000 * rnd)
+  sCmd = "mshta.exe ""javascript:{new " _
+       & "ActiveXObject(""InternetExplorer.Application"")" _
+       & ".PutProperty('" & nRnd & "',window);" _
+       & "window.resizeTo(" & w & "," & h & ");" _
+       & "window.moveTo(" & l & "," & t & ")}"""
+
+  with CreateObject("WScript.Shell")
+    .Run sCmd, 1, False
+    do until .AppActivate("javascript:{new ") : WSH.sleep 10 : loop
+  end with ' WSHShell
+
+  For Each IE In CreateObject("Shell.Application").windows
+    If IsObject(IE.GetProperty(nRnd)) Then
+      set HTABox = IE.GetProperty(nRnd)
+      IE.Quit
+      HTABox.document.title = "HTABox"
+      HTABox.document.write _
+               "<HTA:Application contextMenu=no border=thin " _
+             & "minimizebutton=no maximizebutton=no sysmenu=no />" _
+             & "<body scroll=no style='background-color:" _
+             & sBgColor & ";font:normal 10pt Arial;" _
+             & "border-Style:outset;border-Width:3px'" _
+             & "onbeforeunload='vbscript:if not done.value then " _
+             & "window.event.cancelBubble=true:" _
+             & "window.event.returnValue=false:" _
+             & "done.value=true:end if'>" _
+             & "<input type=hidden id=done value=false>" _
+             & "<center><span id=msg>&nbsp;</span><center></body>"
+      Exit Function
+    End If
+  Next
+
+End Function
