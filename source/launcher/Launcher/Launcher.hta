@@ -1,0 +1,164 @@
+<title>Halo Launcher</title>
+	<HTA:APPLICATION
+  APPLICATIONNAME="launcher"
+  ID="HTA"
+  BORDER="none"
+  INNERBORDER="no"
+  CAPTION="no"
+  SYSMENU="no"
+  MAXIMIZEBUTTON="no"
+  MINIMIZEBUTTON="no"
+  ICON="favicon.ico"
+  SCROLL="no"
+  SCROLLFLAT="yes"
+  SINGLEINSTANCE="yes"
+  CONTEXTMENU="no"
+  NAVIGABLE="yes"
+  SELECTION="no"/>
+
+<style type="text/css">
+	body {
+		margin: 0px;
+	}
+</style>
+
+<script language="jscript">
+
+function theerror(event)
+{
+ error = "Error:\n"+ event;
+ alert(error);
+ return true;
+}
+window.onerror = theerror;
+// ERROR REPORTING ON/OFF (on)
+</script>
+
+<script language="VBScript">
+
+	window.resizeTo 512,256 
+
+	Sub RunProgram
+
+	    Const NORMAL_WINDOW = 1
+
+	    Set objShell = CreateObject("Shell.Application")
+
+	    objShell.ShellExecute "Halo Custom Edition.bat", , , , NORMAL_WINDOW
+
+	End Sub
+
+</script>
+
+<script language="JavaScript" defer="defer">
+function ExitProgram(){
+ window.close();
+}
+</script>
+
+<style>
+	.blue_down {
+		font-family: arial;
+		color: #fff;
+		font-size: 16px;
+		padding: 8px;
+		background: #000;
+		text-decoration: none;
+		border: solid #fff 1px;
+	}
+	.blue_down:hover {
+		background: #fff;
+		text-decoration: none;
+		color: #000;
+		border: solid #fff 1px;
+	}
+	
+	
+	
+	
+	
+	.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+</style>
+
+<body style="background: #0000cc; border-style: solid; border-width: 2px; border-color: #000;" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<script>
+winTitle="Halo Launcher";
+
+minimizeButton=true;
+maximizeButton=true;
+closeButton=true;
+
+var titlebarDialog = window.showModelessDialog("titlebar.hta", new Array(window,winTitle+","+minimizeButton+","+maximizeButton+","+closeButton), "dialogHeight:34px; dialogWidth:"+document.body.offsetWidth+"px; dialogLeft:"+window.screenLeft+"px; dialogTop:"+window.screenTop+"px; help:no; resizable:no; status:no; unadorned:yes;");
+
+window.onresize=function(){
+ try{
+  titlebarDialog.dialogWidth=document.body.offsetWidth+"px";
+  titlebarDialog.dialogLeft=window.screenLeft+"px";
+  titlebarDialog.dialogTop=window.screenTop+"px";
+ } catch(e){
+  //error handling
+ }
+}
+</script>
+
+<div>
+	<p style="margin-top: 42px; margin-left: 12px; color: #fff; font-family: arial;">
+		Some text is here.
+	</p>
+	<p>
+		<a class="blue_down" onclick="VBScript:RunProgram" href="#" style="position: absolute; bottom: 0; margin: 12px; cursor: default;">
+			Play
+		</a>
+		<div style="float: right; margin-top: 148px; margin-right: 10px; color: #fff; font-family: arial; font-size: 12px;">
+			v0.1.0
+		</div>
+	</p>
+</div>
+
+</body>

@@ -284,7 +284,7 @@ if exist "%CD%\resources\base.dll" (
 															move /Y "%CD%\medals.zip" "%CD%\data\%docroot%\My Games\Halo CE\dat\packs\medals.zip"
 															move /Y "%temp%\medals.txt" "%CD%\data\%docroot%\My Games\Halo CE\dat\versions\medals.ns"
 														)
-														taskkill /IM mshta.exe /f
+														close.exe "Notice"
 														del "%temp%\load.vbs"
 														"%CD%\resources\base.dll" -console -use21
 														reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft Games\Halo CE" /f
@@ -753,6 +753,5 @@ del "%temp%\vorbis.txt"
 del "%temp%\vorbisfile.txt"
 del "%temp%\medals.txt"
 del "%temp%\os.txt"
-taskkill /IM mshta.exe /f
 del "%temp%\load.vbs"
 exit
