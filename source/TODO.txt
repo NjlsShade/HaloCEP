@@ -22,5 +22,6 @@ N>    Add "Full Update" query caching (So it doesn't ask you to download every g
 	Find out why medals.zip downloads after first game launch.
 	Add ability to use custom product key (Make them type it twice!);
 *	Remove console for final release;
-	Add custom textures;
+	Add custom textures (Texmod has the best performance);
+	Updates and file checking needs to be handled though the Launcher;
 }
