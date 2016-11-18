@@ -1,0 +1,17 @@
+ShowCollPane:0
+SavePath:C:\Users\Shade\Desktop\uMod_alpha_v2_r53\uMod\textures
+SaveAllTextures:0
+SaveSingleTexture:0
+ShowSingleTextureString:0
+ShowSingleTexture:0
+SupportTPF:1
+UseSizeFilter:0
+Height:1,1
+Width:1,1
+Depth:1,1
+UseFormatFilter:0
+FileFormat:16
+FontColour:255,0,0,255
+TextureColour:0,255,0,255
+
+
