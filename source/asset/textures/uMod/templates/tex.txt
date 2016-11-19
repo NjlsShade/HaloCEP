@@ -1,16 +1,15 @@
-ShowCollPane:0
-SavePath:C:\Users\Shade\Desktop\uMod_alpha_v2_r53\uMod\textures
+ShowCollPane:1
+SavePath:C:\Users\Shade\Desktop\halocep\source\asset\textures\textures
 SaveAllTextures:0
 SaveSingleTexture:0
 ShowSingleTextureString:0
-ShowSingleTexture:0
 SupportTPF:0
 UseSizeFilter:0
 Height:1,1
 Width:1,1
 Depth:1,1
 UseFormatFilter:0
-FileFormat:16
+FileFormat:8
 FontColour:255,0,0,255
 TextureColour:0,255,0,255
 
