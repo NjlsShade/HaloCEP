@@ -1,9 +1,9 @@
-ShowCollPane:1
+ShowCollPane:0
 SavePath:C:\Users\Shade\Desktop\halocep\source\asset\textures\textures
 SaveAllTextures:0
 SaveSingleTexture:0
 ShowSingleTextureString:0
-SupportTPF:0
+SupportTPF:1
 UseSizeFilter:0
 Height:1,1
 Width:1,1

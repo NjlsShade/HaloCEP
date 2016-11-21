@@ -1,27 +1,27 @@
 HaloCEP (0.1.0) {
     Add redist files installer (Integrate?);
     Change DLL file names;
-N>    Move all dependency files to a separate directory;
-N>    Add file version checking and updating (Main file updater as well);
-    Refine medal's images;
-*    Change medal's announcer;
-*    Change %temp% directory;
+    Move all dependency files to a separate directory;
+    Add file version checking and updating (Main file updater as well);
+*   Change %temp% directory;
     Add loading message at startup;
-    Incorporate server software;
     Add version updating when grabbing a file;
-    Do not display output in terminal (No stdout or stderr to speedup processing);
-*    Add window mode;
-*    Add 'medals' repair to full update;
-*    Change the versions.ns file to a text file, rather than a archive;
-*    Add OS compatibility with asset.dll;
-?    Remove multiple crash detection;
-N>    Add "Full Update" query caching (So it doesn't ask you to download every grabup dependency individually >.<);
-*    Add Windows XP support for network checking;
-    Add internet flake toleration;
-    Fix Gathering exception data!!! (custom_chat and optic_pack);
+*   Add 'medals' repair to full update;
+*   Change the versions.ns file to a text file, rather than a archive;
+    Add "Full Update" query caching (So it doesn't ask you to download every grabup dependency individually >.<);
+!   Add Windows XP support for network checking;
+!   Add internet flake toleration;
 	Find out why medals.zip downloads after first game launch.
-	Add ability to use custom product key (Make them type it twice!);
-*	Remove console for final release;
-	Add custom textures (Texmod has the best performance);
-	Updates and file checking needs to be handled though the Launcher;
+N>	Updates and file checking needs to be handled though the Launcher;
+}
+
+HaloCEP (0.1.1) {
+    Refine medal's images;
+*   Change medal's announcer;
+    Incorporate server software;
+*   Add window mode;
+*   Add OS compatibility with asset.dll;
+    Fix Gathering exception data!!! (custom_chat and optic_pack);
+N>	Add custom textures;
+	Add OpenGL support;
 }
