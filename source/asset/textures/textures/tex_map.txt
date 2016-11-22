@@ -23,3 +23,4 @@
 0x7D796B06 - Plasma shield stationary;
 0x5561D2C8 - Plasma shield animation;
 0x904406A6 - Sniper cross-air and zoom number;
+0xF88FD83A - Shotgun;
