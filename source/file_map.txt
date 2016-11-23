@@ -1,56 +1,131 @@
-Core Files {
-	 Keystone.dll - Used for in-game text overlay: Game will still run, but without in-game chat;
-	 ksimeui.dll - Used for in-game text overlay: Game will still run, but without in-game chat;
-	 ogg.dll - Ogg sound codec: Game will crash if missing;
-	+base.dll (haloce.exe) - Main executable: Required to start the game;
-	 strings.dll - Splash screen and startup error: Game will crash if missing;
-	 msvcr71.dll - Visual Studio C++ dependency: Game will crash if missing;
-	 binkw32.dll - Bink Video codec: Game will crash if missing;
-	*[eula.dll]Eula.dll - End User License Agreement dialog: Required to start the game;
-	-patchw32 - Update assist binary by Pocket Soft, Inc: Can be removed with no issues;
-	 vorbisfile.dll - Used to play ogg sound files: Game will crash if missing;
-	 vorbis.dll - Used to read ogg codec: Game will crash if missing;
-	-ebustpx.sem - Unknown use: Can be removed with no issues;
-	 config.txt - Main configuration file: Required to start the game;
-	-xiph_license.txt - Xiph.org Foundation license agreement: Can be removed with no issues;
-	-Uninstal.exe - Used to uninstall Halo Custom Edition: Can be removed with no issues;
-	-Setupenu.dll - Used during the setup process of Halo Custom Edition: Can be removed with no issues;
-	-Readme.rtf - Halo PC/CE manual: Can be removed with no issues;
-	-PidGen.dll - Used during the setup process of Halo Custom Edition: Can be removed with no issues;
-	-mgspid.dll - Used during the setup process of Halo Custom Edition: Can be removed with no issues;
-	-KSML.xsd - Used during the setup process of Halo Custom Edition: Can be removed with no issues;
-	-haloupdate.exe - Used to update Halo PC/CE: Can be removed with no issues;
-	-haloupdate.cfg - Configuration file for haloupdate.exe: Can be removed with no issues;
-	-haloceded.exe - Halo Custom Edition Server software: Can be removed with no issues;
-	-halo1.ico - Unused Halo PC/CE icon file: Can be removed with no issues;
-	-GSArcade.exe - GameSpy arcade installer: Can be removed with no issues;
-	-gamespy.ico - Unused GameSpy icon file: Can be removed with no issues;
-	-favicon.ico - Unused Bungie icon file: Can be removed with no issues;
-	-Eula.rtf - End User License Agreement: Can be removed with no issues;
-	-chktrust.exe - Certificate Verification Tool: Can be removed with no issues;
-	-directx\DSETUP.dll - Used by the DirectX9 installer: Can be removed with no issues;
-	-redist\dxwebsetup.exe - DirectX9 Web Installer: Can be removed with no issues;
-	-redist\instmsia.exe - Libraries for Windows 9X and Windows ME: Can be removed with no issues;
-	-redist\instmsiw.exe - Libraries for NT 4.0 and Windows 2000: Can be removed with no issues;
-	-redist\msxmlenu.msi - Microsoft XML 4.0 SP2 installer: Can be removed with no issues;
-	-redist\Shfolder.exe - Windows universal Shfolder.dll library installer: Can be removed with no issues;
-	-Setup\favicon.ico - Unused setup icon file: Can be removed with no issues;
-	-Setup\gamespy.ico - Unused setup icon file: Can be removed with no issues;
-	-Setup\halo1.ico - Unused setup icon file: Can be removed with no issues;
-	+bungie.bik - Can be removed with no issues;
+Shaded API v0.2.1
+
+	Legend
+	+ File was added to the base Halo Custom Edition game
+	- File was removed in the HaloCEP project
+	* File was modified from its base Halo Custom Edition sate
+	[] Used to add a note in a given context
+	D: Used to indicate taht the given context is a directory
+	F: Used to indicate that the given context is a file type
+
+
+root {
+	 Keystone.dll - Used for in-game text overlay [Game will still run, but without in-game chat];
+	 ksimeui.dll - Used for in-game text overlay [Game will still run, but without in-game chat];
+	 ogg.dll - Ogg sound codec [Game will crash if missing];
+	 msvcr71.dll - Visual Studio C++ dependency [Game will crash if missing];
+	 binkw32.dll - Bink Video codec [Game will crash if missing];
+	-patchw32 - Update assist binary by Pocket Soft, Inc [Can be removed with no issues];
+	 vorbisfile.dll - Used to play ogg sound files [Game will crash if missing];
+	 vorbis.dll - Used to read ogg codec [Game will crash if missing];
+	-ebustpx.sem - Unknown use [Can be removed with no issues];
+	 config.txt - Main configuration file [Required to start the game];
+	-xiph_license.txt - Xiph.org Foundation license agreement [Can be removed with no issues];
+	-Uninstal.exe - Used to uninstall Halo Custom Edition [Can be removed with no issues];
+	-Setupenu.dll - Used during the setup process of Halo Custom Edition [Can be removed with no issues];
+	-Readme.rtf - Halo PC/CE manual [Can be removed with no issues];
+	-PidGen.dll - Used during the setup process of Halo Custom Edition [Can be removed with no issues];
+	-mgspid.dll - Used during the setup process of Halo Custom Edition [Can be removed with no issues];
+	-KSML.xsd - Used during the setup process of Halo Custom Edition [Can be removed with no issues];
+	-haloupdate.exe - Used to update Halo PC/CE [Can be removed with no issues];
+	-haloupdate.cfg - Configuration file for haloupdate.exe [Can be removed with no issues];
+	-haloceded.exe - Halo Custom Edition Server software [Can be removed with no issues];
+	-halo1.ico - Unused Halo PC/CE icon file [Can be removed with no issues];
+	-GSArcade.exe - GameSpy arcade installer [Can be removed with no issues];
+	-gamespy.ico - Unused GameSpy icon file [Can be removed with no issues];
+	-favicon.ico - Unused Bungie icon file [Can be removed with no issues];
+	-Eula.rtf - End User License Agreement [Can be removed with no issues];
+	-chktrust.exe - Certificate Verification Tool [Can be removed with no issues];
+	-directx\DSETUP.dll - Used by the DirectX9 installer [Can be removed with no issues];
+	-redist\instmsia.exe - Libraries for Windows 9X and Windows ME [Can be removed with no issues];
+	-redist\instmsiw.exe - Libraries for NT 4.0 and Windows 2000 [Can be removed with no issues];
+	-Setup\favicon.ico - Unused setup icon file [Can be removed with no issues];
+	-Setup\gamespy.ico - Unused setup icon file [Can be removed with no issues];
+	-Setup\halo1.ico - Unused setup icon file [Can be removed with no issues];
+	~LICENSE - The license file for HaloCEP;
 }
 
-Launcher Files {
-	+libintl3.dll - Dependency library for grabcore.dll: Only needed for automatic updating;
-	+libiconv2.dll - Dependency library for grabcore.dll: Only needed for automatic updating;
-	+grabup.dll - Used to download updates and repair missing or corrupt files: Only needed for automatic updating;
-	+regex2.dll - Dependency library for grabcore.dll: Only needed for automatic updating;
-	+spread.dll - Used when updating Halo's files: Only needed for automatic updating;
-	+grabcore.dll - Used to filter information for dialog.dll: Only needed for automatic updating;
-	+dialog.dll - Used to display update dialogs: Only needed for automatic updating;
-	+osver.dll - Used to check what Windows version is running: Only needed for automatic updating;
+update {
+	+libintl3.dll - Dependency library for grabcore.dll [Only needed for automatic updating];
+	+libiconv2.dll - Dependency library for grabcore.dll [Only needed for automatic updating];
+	+grabup.dll - Used to download updates and repair missing or corrupt files [Only needed for automatic updating];
+	+regex2.dll - Dependency library for grabcore.dll [Only needed for automatic updating];
+	+spread.dll - Used when updating Halo's files [Only needed for automatic updating];
+	+grabcore.dll - Used to filter information for dialog.dll [Only needed for automatic updating];
+	+dialog.dll - Used to display update dialogs [Only needed for automatic updating];
+	+osver.dll - Used to check what Windows version is running [Only needed for automatic updating];
+	+versions.txt - Used to store the version numbers of all binary [Only needed for automatic updating];
+	+versions.ns - Used to store independent version text files for all binary [Only needed for automatic updating : Will be removed in later versions];
 }
 
-Enhancement Files {
-	+controls\asset.dll - Added component to the Halo CE engine: Required to start the game;
+asset {
+	+controls\asset.dll - Added component to the Halo CE engine [Required to start the game];
+}
+
+executable {
+	*[haloce.exe]base.dll - Main executable [Required to start the game];
+	~base_original.dll - Preserved base.dll file [Crated as a backup when using Resource Hacker];
+	~Halo Custom Edition.bat - Used to start the base.dll binary [Main function is to make the game portable and provide automatic updating capabilities, also adding a usefully startup API : Will be replaced with the Launcher in future versions];
+	~halo_shield.ico - Used as the icon for the compiled Halo Custom Edition.exe [Will Change in future versions];
+	~leg.ico - Used as the icon for the HaloCEP installer [Will Change in future versions];
+	~load.dat - Loading screen that is ran while the Halo Custom Edition.exe is processing before the game launchers [Will be removed in a future update];
+}
+
+eula {
+	*[Eula.dll]eula.dll - End User License Agreement dialog [Required to start the game];
+	~eula_original.dll - Preserved eula.dll file [Crated as a backup when using Resource Hacker];
+}
+
+splash {
+	*strings.dll - Splash screen and startup error [Game will crash if missing];
+	~bungie.bik - Splash video [Can be removed with no issues];
+	~splash.bmp - Startup screen splash image [Is injected into strings.dll];
+	~splash.xcf - Startup screen splash image source [Creates splash.bmp];
+	~strings_original.dll - Preserved strings.dll file [Crated as a backup when using Resource Hacker : This holds the original Halo CE splash screen];
+}
+
+source {
+	~bugs.txt - Known bugs map file;
+	~file_map.txt - Map of all files used in this project;
+	~needs_updates.txt - Map of files that need to be added to the update function;
+	~todo.txt - Project todo list;
+}
+
+redist {
+	~redist\dxwebsetup.exe - DirectX9 Web Installer [DirectX9 is needed to run Halo : Can be removed with no issues];
+	~redist\msxmlenu.msi - Microsoft XML 4.0 SP2 installer [Needs to be installed for in-game chat : Can be removed with no issues];
+	~redist\Shfolder.exe - Windows universal Shfolder.dll library installer [Can be removed with no issues];
+	~redist\vcredist_x86.exe - Visual Studio C++ 2010 installer [Needs to be installed to play Halo : Can be removed with no issues];
+}
+
+launcher {
+	~init.bat - Runs on the Launcher's start to check for updates;
+	~Launcher.hta - Core Launcher framework;
+	~logo.ico - Launcher's icon;
+	~logo.png - Launcher's logo;
+	~logo.xcf - Launcher's logo and icon source;
+	~titlebar.hta - Launcher's titlebar [Needed, as the Launcher uses a separate GUI process that attaches to the main GUI : This allows the Launcher to be draggable];
+}
+
+dat {
+	~preferences.ini - Is the configuration file for the asset.dll engine extender [This file currently holds only the minimal settings that are expected to be utilized by asset.dll];
+	~preferences_full.ini - Is the configuration file for the asset.dll engine extender [This file holds the full application of settings expected to be incorporated into the HaloCEP project];
+	packs {
+		~medals.zip - The archive that contains the production assets for in game kill streaks and medals;
+		medals {
+			~D:audio - This folder contains the audio files used for in game kill streaks;
+			~D:images - This folder contains the image files used for in game medals;
+			~meta.txt - The meta file for medals.zip;
+			~script.lua - The API used to call the audio and image assets used in medals.zip;
+		}
+		source {
+			~D:images - This folder contains the GIMP source files for the images used in medals.zip;
+		}
+	}
+	~D:versions - This folder contains the version files for the archive !versions.ns;
+}
+
+content {
+	*F:ksml - These XML based files are used for the in game chat box framework;
+	~D:Galary - These image files are used for the in game chat;
 }
