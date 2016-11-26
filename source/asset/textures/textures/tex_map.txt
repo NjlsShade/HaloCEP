@@ -24,3 +24,6 @@
 0x5561D2C8 - Plasma shield animation;
 0x904406A6 - Sniper cross-air and zoom number;
 0xF88FD83A - Shotgun;
+0x2FDDEE60 - Health bar manifest;
+0x106FA56E - Regeneration bar border;
+0xB439BF9E - Heath plus sign;

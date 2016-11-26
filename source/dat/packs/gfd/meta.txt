@@ -1,0 +1,4 @@
+name=HaloCEP
+description=Official HaloCEP Medals
+api_version=1.0.0
+author=NjlsAssets

@@ -193,8 +193,8 @@ function create_animations ()
 
 	create_animation("hitmarker_ani")
 
-	add_keyframe("hitmarker_ani", 0, 0.49, 8) -- x pos
-	add_keyframe("hitmarker_ani", 0, 0.52, 9) -- y pos
+	add_keyframe("hitmarker_ani", 0, 0.0, 8) -- x pos
+	add_keyframe("hitmarker_ani", 0, 0.0, 9) -- y pos
 
 	add_keyframe("hitmarker_ani", 0, 1.5, 0) -- scale
 	add_keyframe("hitmarker_ani", 100, 2, 0, 2) -- scale
@@ -220,8 +220,8 @@ function create_animations ()
 
 	create_animation("killmarker_ani")
 
-	add_keyframe("killmarker_ani", 0, 0.49, 8) -- x pos
-	add_keyframe("killmarker_ani", 0, 0.52, 9) -- y pos
+	add_keyframe("killmarker_ani", 0, 0.0, 8) -- x pos
+	add_keyframe("killmarker_ani", 0, 0.0, 9) -- y pos
 
 	add_keyframe("killmarker_ani", 0, 1.5, 0) -- scale
 	add_keyframe("killmarker_ani", 100, 2, 0, 2) -- scale
