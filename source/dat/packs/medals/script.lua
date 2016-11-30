@@ -59,7 +59,7 @@ end
 
 function hit_detect(event, killer, victim, player, timestamp)
        if(killer == player) then
-		       display("Hit!", "hitmarker_medal", "audio/hm_hit.mp3")
+		gfx_display("Hit!", "hitmarker_medal")
        end
 end
 
@@ -91,7 +91,7 @@ end
 
 function player_kills(event, killer, victim, player, timestamp)
 	if(killer == player) then
-		display("Kill!", "killmarker_medal", "audio/hm_kill.mp3")
+		--display("Kill!", "killmarker_medal", "audio/hm_kill.mp3")
 		queued = 0
 		spree = spree + 1
 		kills = kills + 1
