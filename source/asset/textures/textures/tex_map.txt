@@ -27,3 +27,4 @@
 0x2FDDEE60 - Health bar manifest;
 0x106FA56E - Regeneration bar border;
 0xB439BF9E - Heath plus sign;
+0x6BD91F7A - Shotgun lighting;
