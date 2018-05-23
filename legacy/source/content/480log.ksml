@@ -1,0 +1,10 @@
+<ksml>
+	<head/>
+<body>
+	<listbox left="5" top="260" width="640" height="130" id="oListbox"
+			 textbackground="#00000000" outerborder="#00000000"
+			 innerborder="#00000000" shadow="#00000000" highlight="#00000000"
+			 textcolor="#ffffffff" font="Arial Narrow-8-bold"
+/>
+</body>
+</ksml>

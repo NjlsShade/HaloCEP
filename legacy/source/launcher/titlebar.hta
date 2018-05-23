@@ -1,0 +1,72 @@
+<HTA:application border="none"/>
+
+<script>
+	if(window.dialogWidth==undefined){window.close()};
+
+	var move = new Object();
+	function mouseDown(){
+	document.body.setCapture(); 
+	move.x=window.event.screenX; 
+	move.y=window.event.screenY; 
+	move.winX=window.screenLeft; 
+	move.winY=window.screenTop; 
+	document.body.attachEvent("onmousemove", mouseMove);
+	document.body.attachEvent("onmouseup", mouseUp);
+	} 
+	function mouseMove() { 
+	newWinX=(move.winX+(window.event.screenX-move.x));
+	newWinY=(move.winY+(window.event.screenY-move.y));
+	if(newWinY>(screen.availHeight-20)){newWinY=screen.availHeight-20};
+	parTop.moveTo(newWinX-0,newWinY-0);
+	window.dialogLeft=newWinX;
+	window.dialogTop=newWinY;
+	document.body.setCapture();
+	} 
+	function mouseUp() { 
+	document.body.detachEvent("onmousemove", mouseMove); 
+	document.body.detachEvent("onmouseup", mouseUp); 
+	document.body.releaseCapture(); 
+	}
+
+	var dontCloseMain = false;
+
+	var parTop=window.dialogArguments;
+	if(parTop.length==2){
+	 winCont=parTop[1].split(",");
+	 parTop=parTop[0];
+	} else{
+	 dontCloseMain=true;
+	 window.close();
+	}
+</script>
+
+<style>
+	.red_down {
+		font-family: arial;
+		color: #fff;
+		font-size: 16px;
+		padding: 8px;
+		background: #000;
+		text-decoration: none;
+		border-left: solid #fff 1px;
+	}
+	.red_down:hover {
+		background: #ff0000;
+		text-decoration: none;
+		color: #fff;
+		border-left: solid #fff 1px;
+	}
+</style>
+
+<body style="border:0px;" scroll="no" onbeforeunload="if(!dontCloseMain){parTop.closeHTA()}" onresize="document.getElementById('titlebar').style.width=window.dialogWidth">
+
+	<div style="height: 28px; padding-bottom: 6px; background-color: #000000; color: #fff; float: bottom;" onmousedown="mouseDown()">
+		<a class="red_down" onclick="parTop.ExitProgram()" href="#" style="float: right; cursor: default; outline: none;">
+			<i class="icon-download"></i>&nbsp;X&nbsp;
+		</a>
+		<div style="font-family: arial; float: left; margin-top: 7px;">
+			&nbsp;&nbsp;Halo Launcher
+		</div>
+	</div>
+		
+</body>

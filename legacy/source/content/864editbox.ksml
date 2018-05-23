@@ -1,0 +1,12 @@
+<ksml>
+	<head/>
+<body>
+	<editbox width="768" left="160" top="834" background="gallery\editbox864.png"
+	id="oEditbox" ime="false" tabindex="0" maxlength="128"
+	font="Arial Narrow-14-bold" color="#ffffffff"
+	/>
+	<label left="0" top="836" width="160" text="Prompt" id="oPrompt"
+	font="Arial Narrow-14-bold" color="#ff00ff00"
+	/>
+</body>
+</ksml>

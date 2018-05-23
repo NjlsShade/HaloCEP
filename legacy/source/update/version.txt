@@ -1,0 +1,15 @@
+base 0.0.1
+binkw32 0.0.1
+config 0.0.1
+eula 0.0.1
+Keystone 0.0.1
+ksimeui.dll 0.0.1
+msvcr71 0.0.1
+ogg 0.0.1
+strings 0.0.1
+vorbis 0.0.1
+vorbisfile 0.0.1
+spread 0.0.1
+dat 0.0.1
+asset 0.0.1
+medals 0.0.1

@@ -1,4 +1,0 @@
-name=Overshield
-description=Official Overshield Medals
-api_version=1.0.0
-author=NjlsAssets

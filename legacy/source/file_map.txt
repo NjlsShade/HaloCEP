@@ -1,0 +1,163 @@
+Shaded API v0.2.2
+
+	Legend
+	+ File was added to the base Halo Custom Edition game
+	- File was removed in the HaloCEP project
+	* File was modified from its base Halo Custom Edition sate
+	[] Used to add a note in a given context
+	D: Used to indicate taht the given context is a directory
+	F: Used to indicate that the given context is a file type
+	! Used to reference another file or directory in the file_map
+
+
+root {
+	 Keystone.dll - Used for in-game text overlay [Game will still run, but without in-game chat];
+	 ksimeui.dll - Used for in-game text overlay [Game will still run, but without in-game chat];
+	 ogg.dll - Ogg sound codec [Game will crash if missing];
+	 msvcr71.dll - Visual Studio C++ dependency [Game will crash if missing];
+	 binkw32.dll - Bink Video codec [Game will crash if missing];
+	-patchw32 - Update assist binary by Pocket Soft, Inc [Can be removed with no issues];
+	 vorbisfile.dll - Used to play ogg sound files [Game will crash if missing];
+	 vorbis.dll - Used to read ogg codec [Game will crash if missing];
+	-ebustpx.sem - Unknown use [Can be removed with no issues];
+	 config.txt - Main configuration file [Required to start the game];
+	-xiph_license.txt - Xiph.org Foundation license agreement [Can be removed with no issues];
+	-Uninstal.exe - Used to uninstall Halo Custom Edition [Can be removed with no issues];
+	-Setupenu.dll - Used during the setup process of Halo Custom Edition [Can be removed with no issues];
+	-Readme.rtf - Halo PC/CE manual [Can be removed with no issues];
+	-PidGen.dll - Used during the setup process of Halo Custom Edition [Can be removed with no issues];
+	-mgspid.dll - Used during the setup process of Halo Custom Edition [Can be removed with no issues];
+	-KSML.xsd - Used during the setup process of Halo Custom Edition [Can be removed with no issues];
+	-haloupdate.exe - Used to update Halo PC/CE [Can be removed with no issues];
+	-haloupdate.cfg - Configuration file for haloupdate.exe [Can be removed with no issues];
+	-haloceded.exe - Halo Custom Edition Server software [Can be removed with no issues];
+	-halo1.ico - Unused Halo PC/CE icon file [Can be removed with no issues];
+	-GSArcade.exe - GameSpy arcade installer [Can be removed with no issues];
+	-gamespy.ico - Unused GameSpy icon file [Can be removed with no issues];
+	-favicon.ico - Unused Bungie icon file [Can be removed with no issues];
+	-Eula.rtf - End User License Agreement [Can be removed with no issues];
+	-chktrust.exe - Certificate Verification Tool [Can be removed with no issues];
+	-directx\DSETUP.dll - Used by the DirectX9 installer [Can be removed with no issues];
+	-redist\instmsia.exe - Libraries for Windows 9X and Windows ME [Can be removed with no issues];
+	-redist\instmsiw.exe - Libraries for NT 4.0 and Windows 2000 [Can be removed with no issues];
+	-Setup\favicon.ico - Unused setup icon file [Can be removed with no issues];
+	-Setup\gamespy.ico - Unused setup icon file [Can be removed with no issues];
+	-Setup\halo1.ico - Unused setup icon file [Can be removed with no issues];
+	~LICENSE - The license file for HaloCEP;
+}
+
+update {
+	+resources\libintl3.dll - Dependency library for grabcore.dll [Only needed for automatic updating];
+	+resources\libiconv2.dll - Dependency library for grabcore.dll [Only needed for automatic updating];
+	+resources\grabup.dll - Used to download updates and repair missing or corrupt files [Only needed for automatic updating];
+	+resources\regex2.dll - Dependency library for grabcore.dll [Only needed for automatic updating];
+	+resources\spread.dll - Used when updating Halo's files [Only needed for automatic updating];
+	+resources\grabcore.dll - Used to filter information for dialog.dll [Only needed for automatic updating];
+	+resources\dialog.dll - Used to display update dialogs [Only needed for automatic updating];
+	+resources\osver.dll - Used to check what Windows version is running [Only needed for automatic updating];
+	+versions.txt - Used to store the version numbers of all binary [Only needed for automatic updating];
+	+versions.ns - Used to store independent version text files for all binary [Only needed for automatic updating : Will be removed in later versions];
+}
+
+asset {
+	+controls\asset.dll - Added component to the Halo CE engine [Required to start the game];
+	+D:Open Sauce - This file contains the structure needed for utilizing the Open Sauce Blam! Engine extender in the HaloCEP project [These files will be studied and properly documented at a later time];
+	OpenGL {
+		~resources\d3d9.dll - Allows the use of OpenGL rendering [Conflicts with the use of uMod for texturing and ENB : Need to find a way to allow both OpenGL and custom textures];
+	}
+	program hider {
+		~resources\chp.exe - Used to hide the uMod interface when utilizing it for in-game texture modification [May note be called chp.exe in the final release];
+	}
+	shaders {
+		~resources\d3d9.dll - Allows the use of ENB effects [Conflicts with the use of uMod for texturing and OpenGL : This file will most likely be removed in future releases, as it is of no use if Open Sauce implementation goes as planed];
+		~resources\enbseries.ini - configuration file for !shaders{d3d9.dll};
+	}
+	textures {
+		~D:atextures - Contains the textures of the Halo CE Anniversary TexMod for Halo Custom Edition [These files are used as reference : These textures mostly suck];
+		~D:ENB - Contains files that should allow uMod and OpenGL to be used together [Have not got far with this, but feel it wont end up working as intended];
+		textures {
+			~F:dds - Textures for use with uMod;
+			~tex_map.txt - File map for the dds textures [This map may be integrated into !file_map.txt];
+			~tex.log - Used to map the dds files with their checksum for !TexMod.exe to compile;
+			~D:work - Holds all the texture source that is being developed, and organizes them [The files in here will most likely be mapped in the future];
+		}
+	}
+	tmp (Temporary directory for ripping textures) {
+		~F:tga - These files are ripped from RAM in the tga format [tga gives the most successful RAM rip, however, they are converted into dds files for use];
+		~D:new - Holds newly ripped tga files that will be used as replacements for old textures;
+		~D:old - Holds vanilla textures that will be used as reference for new textures;
+	}
+	ui {
+		~ui - The game UI that is being used for the retexture;
+	}
+	~D:uMod - Holds the uMod application used to apply custom textures [May be mapped in the future];
+	~Texmod.exe - Used to rip textures from RAM and test new textures;
+}
+
+executable {
+	*[haloce.exe]resources\base.dll - Main executable [Required to start the game];
+	~base_original.dll - Preserved base.dll file [Crated as a backup when using Resource Hacker];
+	~Halo Custom Edition.bat - Used to start the base.dll binary [Main function is to make the game portable and provide automatic updating capabilities, also adding a usefully startup API : Will be replaced with the Launcher in future versions];
+	~halo_shield.ico - Used as the icon for the compiled Halo Custom Edition.exe [Will Change in future versions];
+	~leg.ico - Used as the icon for the HaloCEP installer [Will Change in future versions];
+	~load.dat - Loading screen that is ran while the Halo Custom Edition.exe is processing before the game launchers [Will be removed in a future update];
+}
+
+eula {
+	*[Eula.dll]resources\eula.dll - End User License Agreement dialog [Required to start the game];
+	~eula_original.dll - Preserved eula.dll file [Crated as a backup when using Resource Hacker];
+}
+
+splash {
+	*resources\strings.dll - Splash screen and startup error [Game will crash if missing];
+	~resources\bungie.bik - Splash video [Can be removed with no issues];
+	~splash.bmp - Startup screen splash image [Is injected into strings.dll];
+	~splash.xcf - Startup screen splash image source [Creates splash.bmp];
+	~strings_original.dll - Preserved strings.dll file [Crated as a backup when using Resource Hacker : This holds the original Halo CE splash screen];
+}
+
+source {
+	~bugs.txt - Known bugs map file;
+	~file_map.txt - Map of all files used in this project;
+	~needs_updates.txt - Map of files that need to be added to the update function;
+	~todo.txt - Project todo list;
+}
+
+dependencies {
+	~redist\dxwebsetup.exe - DirectX9 Web Installer [DirectX9 is needed to run Halo : Can be removed with no issues];
+	~redist\msxmlenu.msi - Microsoft XML 4.0 SP2 installer [Needs to be installed for in-game chat : Can be removed with no issues];
+	~redist\Shfolder.exe - Windows universal Shfolder.dll library installer [Can be removed with no issues];
+	~redist\vcredist_x86.exe - Visual Studio C++ 2010 installer [Needs to be installed to play Halo : Can be removed with no issues];
+}
+
+launcher {
+	~init.bat - Runs on the Launcher's start to check for updates;
+	~Launcher.hta - Core Launcher framework;
+	~logo.ico - Launcher's icon;
+	~logo.png - Launcher's logo;
+	~logo.xcf - Launcher's logo and icon source;
+	~titlebar.hta - Launcher's titlebar [Needed, as the Launcher uses a separate GUI process that attaches to the main GUI : This allows the Launcher to be draggable];
+}
+
+dat {
+	~data\Documents\My Games\Halo CE\dat\preferences.ini - Is the configuration file for the asset.dll engine extender [This file currently holds only the minimal settings that are expected to be utilized by asset.dll];
+	~preferences_full.ini - Is the configuration file for the asset.dll engine extender [This file holds the full application of settings expected to be incorporated into the HaloCEP project];
+	packs {
+		~data\Documents\My Games\Halo CE\dat\packs\medals.zip - The archive that contains the production assets for in game kill streaks and medals;
+		medals {
+			~D:audio - This folder contains the audio files used for in game kill streaks;
+			~D:images - This folder contains the image files used for in game medals;
+			~meta.txt - The meta file for medals.zip;
+			~script.lua - The API used to call the audio and image assets used in medals.zip;
+		}
+		source {
+			~D:images - This folder contains the GIMP source files for the images used in medals.zip;
+		}
+	}
+	~D:versions - This folder contains the version files for the archive !versions.ns;
+}
+
+content {
+	*F:content\ksml - These XML based files are used for the in game chat box framework;
+	~D:content\Galary - These image files are used for the in game chat;
+}
