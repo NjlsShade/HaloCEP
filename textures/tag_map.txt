@@ -1,1 +1,33 @@
-betabuild
+BATA BUILD
+kinnet\ui\hud\bitmaps\betabuild
+
+UI Galaxy
+sky\sky_x10\bitmaps\galaxy
+BASE.EXE_0xCB63C5CA.png
+
+UI Stars
+sky\space\bitmaps\stars
+BASE.EXE_0x1A2F3BEF.png
+
+UI Space Mist
+sky\sky_x10\bitmaps\space
+BASE.EXE_0x5D911883.png
+
+UI Large Planet
+sky\planet\threshold space
+BASE.EXE_0xFE3AFC51.png
+BASE.EXE_0xFE3AFC51_mask.png
+
+UI Outer ring
+scenery\halo\bitmaps\halo outer ring
+BASE.EXE_0x796E0ED6.png
+
+UI inner ring
+scenery\halo\bitmaps\halo outer ring
+BASE.EXE_0xE3D75D86.png
+
+Armor color menu
+ui\shell\main_menu\button_bitmaps\settings\colour\colours
+
+Main Menu Logo
+ui\shell\main_menu\button_bitmaps\logo
