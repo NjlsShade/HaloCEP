@@ -23,7 +23,7 @@ scenery\halo\bitmaps\halo outer ring
 BASE.EXE_0x796E0ED6.png
 
 UI inner ring
-scenery\halo\bitmaps\halo outer ring
+scenery\halo\bitmaps\halo inner ring
 BASE.EXE_0xE3D75D86.png
 
 Armor color menu
@@ -31,3 +31,6 @@ ui\shell\main_menu\button_bitmaps\settings\colour\colours
 
 Main Menu Logo
 ui\shell\main_menu\button_bitmaps\logo
+
+Multiplayer Map icons
+ui\shell\bitmaps\mp_map_grafix
