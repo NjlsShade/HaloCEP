@@ -5,5 +5,5 @@ Overshield is a project created to extend the life of the dying game, Halo Custo
 
 # Linux Requirements
 
-*Arch*
+**Arch**
 lib32-mpg123
