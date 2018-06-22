@@ -1,0 +1,22 @@
+Model Tags
+	[Spartan]
+	mod2:dreamweb\characters\spartan\cea\spartan
+	[Spartan First Person]
+	mod2:dreamweb\characters\spartan\cea\spartan_fp
+
+Weapon Tags
+	[Plasma Pistol]
+	weap:weapons\plasma pistol\plasma pistol
+
+
+Hud Tags
+	[frag grenad]
+	grhi:ui\hud\default
+	[plasma grenad]
+	grhi:ui\hud\plasma\plasma_flare
+
+bipd Tags
+	[MP Assets]
+	characters\cyborg_mp\cyborg_mp
+	[Assets]
+	characters\cyborg\cyborg
