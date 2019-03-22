@@ -33,5 +33,5 @@ chimera_block_gametype_indicator "false"
 
 
 #Dev Options
-chimera_budget "true"
+#chimera_budget "true"
 #chimera_wireframe "true"
